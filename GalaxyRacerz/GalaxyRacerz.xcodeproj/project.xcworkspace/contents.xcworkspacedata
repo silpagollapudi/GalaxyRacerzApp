@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/silpagollapudi/Documents/GalaxyRacerz-master-2/GalaxyRacerz/GalaxyRacerz/fonts">
+      location = "group:arrowButton.png">
    </FileRef>
    <FileRef
       location = "self:">
