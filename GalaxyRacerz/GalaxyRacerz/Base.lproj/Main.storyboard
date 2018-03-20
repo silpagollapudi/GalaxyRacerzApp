@@ -62,12 +62,15 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ig3-iI-RrD">
                                 <rect key="frame" x="34" y="584" width="165" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="login"/>
+                                <state key="normal" title="Login" image="login"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y8e-OL-YO7">
                                 <rect key="frame" x="207" y="586" width="172" height="88"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="signup"/>
+                                <state key="normal" title="Sign Up" image="signup"/>
+                                <connections>
+                                    <segue destination="XHw-Y1-gS6" kind="show" identifier="showSignup" id="8Cb-Oh-TKv"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -77,12 +80,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ah-x0-dYR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-423.1884057971015" y="105.97826086956522"/>
+            <point key="canvasLocation" x="-532" y="86"/>
         </scene>
-        <!--View Controller-->
+        <!--SignupViewController-->
         <scene sceneID="uUc-0f-XzL">
             <objects>
-                <viewController id="XHw-Y1-gS6" sceneMemberID="viewController">
+                <viewController title="SignupViewController" id="XHw-Y1-gS6" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cN2-ID-9hK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -128,7 +131,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="men-TS-EMb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="356.52173913043481" y="111.68478260869566"/>
+            <point key="canvasLocation" x="319" y="86"/>
         </scene>
     </scenes>
     <resources>
