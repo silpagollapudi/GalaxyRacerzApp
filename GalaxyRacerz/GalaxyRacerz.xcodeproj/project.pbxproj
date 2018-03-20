@@ -11,6 +11,8 @@
 		72648B932061AACB007034E8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82ACF42D2060752700EECB2F /* Info.plist */; };
 		72648B952061AC1D007034E8 /* Frijole-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72648B942061AC1D007034E8 /* Frijole-Regular.ttf */; };
 		72648B9C2061AF36007034E8 /* spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 72648B9B2061AF36007034E8 /* spaceship.png */; };
+		72648BA32061B42C007034E8 /* signup.png in Resources */ = {isa = PBXBuildFile; fileRef = 72648BA12061B42B007034E8 /* signup.png */; };
+		72648BA42061B42C007034E8 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 72648BA22061B42B007034E8 /* login.png */; };
 		82ACF4202060752700EECB2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ACF41F2060752700EECB2F /* AppDelegate.swift */; };
 		82ACF4222060752700EECB2F /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 82ACF4212060752700EECB2F /* art.scnassets */; };
 		82ACF4242060752700EECB2F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ACF4232060752700EECB2F /* GameViewController.swift */; };
@@ -42,6 +44,8 @@
 		72648B8D2061A40C007034E8 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		72648B942061AC1D007034E8 /* Frijole-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Frijole-Regular.ttf"; path = "GalaxyRacerz/fonts/Frijole-Regular.ttf"; sourceTree = "<group>"; };
 		72648B9B2061AF36007034E8 /* spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaceship.png; sourceTree = "<group>"; };
+		72648BA12061B42B007034E8 /* signup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signup.png; sourceTree = "<group>"; };
+		72648BA22061B42B007034E8 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login.png; sourceTree = "<group>"; };
 		82ACF41C2060752700EECB2F /* GalaxyRacerz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GalaxyRacerz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82ACF41F2060752700EECB2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82ACF4212060752700EECB2F /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -111,6 +115,8 @@
 				82ACF4212060752700EECB2F /* art.scnassets */,
 				82ACF4232060752700EECB2F /* GameViewController.swift */,
 				82ACF4252060752700EECB2F /* Main.storyboard */,
+				72648BA22061B42B007034E8 /* login.png */,
+				72648BA12061B42B007034E8 /* signup.png */,
 				82ACF44F2060799700EECB2F /* LoadScreenViewController.swift */,
 				82ACF4282060752700EECB2F /* Assets.xcassets */,
 				72648B9B2061AF36007034E8 /* spaceship.png */,
@@ -248,6 +254,8 @@
 				72648B952061AC1D007034E8 /* Frijole-Regular.ttf in Resources */,
 				72648B9C2061AF36007034E8 /* spaceship.png in Resources */,
 				82ACF4222060752700EECB2F /* art.scnassets in Resources */,
+				72648BA32061B42C007034E8 /* signup.png in Resources */,
+				72648BA42061B42C007034E8 /* login.png in Resources */,
 				82ACF4292060752700EECB2F /* Assets.xcassets in Resources */,
 				82ACF4272060752700EECB2F /* Main.storyboard in Resources */,
 				72648B8E2061A40C007034E8 /* fonts in Resources */,
