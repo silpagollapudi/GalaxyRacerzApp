@@ -63,6 +63,9 @@
                                 <rect key="frame" x="34" y="584" width="165" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Login" image="login"/>
+                                <connections>
+                                    <segue destination="Wvv-PQ-zhN" kind="show" identifier="loginShow" id="q2a-fj-Cdj"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y8e-OL-YO7">
                                 <rect key="frame" x="207" y="586" width="172" height="88"/>
@@ -82,10 +85,10 @@
             </objects>
             <point key="canvasLocation" x="-532" y="86"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="QX7-jJ-YXG">
             <objects>
-                <viewController id="Wvv-PQ-zhN" sceneMemberID="viewController">
+                <viewController id="Wvv-PQ-zhN" customClass="LoginViewController" customModule="GalaxyRacerz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VWa-Ld-pjV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -135,11 +138,17 @@
                                 <rect key="frame" x="152" y="593" width="110" height="101"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="arrowButton-1"/>
+                                <connections>
+                                    <action selector="arrowButtonPress:" destination="Wvv-PQ-zhN" eventType="touchUpInside" id="sg4-a5-960"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CSC-Ak-4O4">
                                 <rect key="frame" x="0.0" y="0.0" width="86" height="84"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="back"/>
+                                <connections>
+                                    <segue destination="XuO-3g-ZSb" kind="show" identifier="loginBack" id="4NB-xN-iI4"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -148,12 +157,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r37-dl-dP0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="282.60869565217394" y="495.6521739130435"/>
+            <point key="canvasLocation" x="762" y="333"/>
         </scene>
         <!--SignupViewController-->
         <scene sceneID="uUc-0f-XzL">
             <objects>
-                <viewController title="SignupViewController" id="XHw-Y1-gS6" sceneMemberID="viewController">
+                <viewController title="SignupViewController" id="XHw-Y1-gS6" customClass="SignupViewController" customModule="GalaxyRacerz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cN2-ID-9hK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -178,6 +187,37 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g9d-4W-qKZ">
+                                <rect key="frame" x="10" y="10" width="86" height="84"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="back"/>
+                                <connections>
+                                    <segue destination="XuO-3g-ZSb" kind="show" identifier="signupBack" id="JVK-5g-DYB"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IAV-FJ-OVW">
+                                <rect key="frame" x="206" y="567" width="188" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.54313066710000002" green="0.54313066710000002" blue="0.54313066710000002" alpha="0.56112455989999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YPp-cf-ZqA">
+                                <rect key="frame" x="206" y="493" width="188" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.54313066710000002" green="0.54313066710000002" blue="0.54313066710000002" alpha="0.56112455989999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3Y-Do-nY1">
+                                <rect key="frame" x="20" y="490" width="176" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Frijole" family="Frijole" pointSize="27"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Create your " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7lY-Pu-73c">
                                 <rect key="frame" x="63" y="51" width="325" height="99"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -192,14 +232,26 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kso-tM-9ta">
+                                <rect key="frame" x="152" y="605" width="110" height="101"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="arrowButton-1"/>
+                                <connections>
+                                    <action selector="arrowButtonPressed:" destination="XHw-Y1-gS6" eventType="touchUpInside" id="H07-mN-tET"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="tKK-C7-xVh"/>
                     </view>
+                    <connections>
+                        <outlet property="passwordTextField" destination="IAV-FJ-OVW" id="Bgp-MX-t8a"/>
+                        <outlet property="usernameTextField" destination="YPp-cf-ZqA" id="QfU-NT-W1c"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="men-TS-EMb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="270" y="-271"/>
+            <point key="canvasLocation" x="428" y="-448"/>
         </scene>
     </scenes>
     <resources>
@@ -210,4 +262,7 @@
         <image name="signup" width="534" height="240"/>
         <image name="spaceship" width="512" height="512"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="4NB-xN-iI4"/>
+    </inferredMetricsTieBreakers>
 </document>
