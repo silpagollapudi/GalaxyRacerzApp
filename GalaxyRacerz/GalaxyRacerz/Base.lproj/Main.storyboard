@@ -140,6 +140,7 @@
                                 <state key="normal" title="Button" image="arrowButton-1"/>
                                 <connections>
                                     <action selector="arrowButtonPress:" destination="Wvv-PQ-zhN" eventType="touchUpInside" id="sg4-a5-960"/>
+                                    <action selector="arrowButtonPressed:" destination="Wvv-PQ-zhN" eventType="touchUpInside" id="gOB-JG-lTM"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CSC-Ak-4O4">
@@ -154,6 +155,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Lw6-kG-NSA"/>
                     </view>
+                    <connections>
+                        <outlet property="passInputText" destination="ytD-Am-t9x" id="2jn-cf-zJD"/>
+                        <outlet property="userInputText" destination="bLW-th-3MI" id="x8x-3b-jBz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r37-dl-dP0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -195,6 +200,14 @@
                                     <segue destination="XuO-3g-ZSb" kind="show" identifier="signupBack" id="JVK-5g-DYB"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kso-tM-9ta">
+                                <rect key="frame" x="152" y="605" width="110" height="101"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="arrowButton-1"/>
+                                <connections>
+                                    <action selector="arrowButtonPressed:" destination="XHw-Y1-gS6" eventType="touchUpInside" id="H07-mN-tET"/>
+                                </connections>
+                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IAV-FJ-OVW">
                                 <rect key="frame" x="206" y="567" width="188" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -232,14 +245,13 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kso-tM-9ta">
-                                <rect key="frame" x="152" y="605" width="110" height="101"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87d-aq-hH0">
+                                <rect key="frame" x="20" y="559" width="234" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="arrowButton-1"/>
-                                <connections>
-                                    <action selector="arrowButtonPressed:" destination="XHw-Y1-gS6" eventType="touchUpInside" id="H07-mN-tET"/>
-                                </connections>
-                            </button>
+                                <fontDescription key="fontDescription" name="Frijole" family="Frijole" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="tKK-C7-xVh"/>
@@ -263,6 +275,6 @@
         <image name="spaceship" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4NB-xN-iI4"/>
+        <segue reference="JVK-5g-DYB"/>
     </inferredMetricsTieBreakers>
 </document>
