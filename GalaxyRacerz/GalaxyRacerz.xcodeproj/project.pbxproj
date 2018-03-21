@@ -7,17 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7227681F20621F7D00037948 /* person.png in Resources */ = {isa = PBXBuildFile; fileRef = 7227681E20621F7C00037948 /* person.png */; };
+		722768242062223A00037948 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 722768202062223700037948 /* settings.png */; };
+		722768252062223A00037948 /* achievements.png in Resources */ = {isa = PBXBuildFile; fileRef = 722768212062223800037948 /* achievements.png */; };
+		722768262062223A00037948 /* help.png in Resources */ = {isa = PBXBuildFile; fileRef = 722768222062223900037948 /* help.png */; };
+		722768272062223A00037948 /* volume.png in Resources */ = {isa = PBXBuildFile; fileRef = 722768232062223900037948 /* volume.png */; };
+		722768292062224300037948 /* main.png in Resources */ = {isa = PBXBuildFile; fileRef = 722768282062224200037948 /* main.png */; };
+		7227682B2062236E00037948 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 7227682A2062236E00037948 /* play.png */; };
+		7227682D20622E1A00037948 /* text.png in Resources */ = {isa = PBXBuildFile; fileRef = 7227682C20622E1900037948 /* text.png */; };
+		722D61532062356900C99B3B /* asteroidbelt.gif in Resources */ = {isa = PBXBuildFile; fileRef = 722D61512062356600C99B3B /* asteroidbelt.gif */; };
+		722D61542062356900C99B3B /* blast.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 722D61522062356800C99B3B /* blast.jpeg */; };
+		722D61562062379B00C99B3B /* trophy.png in Resources */ = {isa = PBXBuildFile; fileRef = 722D61552062379A00C99B3B /* trophy.png */; };
+		722D615820623C3100C99B3B /* MandroidBB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722D615720623C3100C99B3B /* MandroidBB.ttf */; };
 		72648B8E2061A40C007034E8 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 72648B8D2061A40C007034E8 /* fonts */; };
 		72648B932061AACB007034E8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82ACF42D2060752700EECB2F /* Info.plist */; };
 		72648B952061AC1D007034E8 /* Frijole-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72648B942061AC1D007034E8 /* Frijole-Regular.ttf */; };
-		72648B9C2061AF36007034E8 /* spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 72648B9B2061AF36007034E8 /* spaceship.png */; };
-		72648BA32061B42C007034E8 /* signup.png in Resources */ = {isa = PBXBuildFile; fileRef = 72648BA12061B42B007034E8 /* signup.png */; };
-		72648BA42061B42C007034E8 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 72648BA22061B42B007034E8 /* login.png */; };
-		72648BA82061BA38007034E8 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 72648BA72061BA37007034E8 /* back.png */; };
 		82A4DE8E2061BC1700AFCB1F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A4DE8D2061BC1700AFCB1F /* LoginViewController.swift */; };
 		82A4DE902061BC2700AFCB1F /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A4DE8F2061BC2700AFCB1F /* SignupViewController.swift */; };
 		82A4DE942061BF4900AFCB1F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A4DE932061BF4900AFCB1F /* User.swift */; };
-		82A4DE962061C69B00AFCB1F /* arrowButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 82A4DE952061C69B00AFCB1F /* arrowButton.png */; };
 		82ACF4202060752700EECB2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ACF41F2060752700EECB2F /* AppDelegate.swift */; };
 		82ACF4222060752700EECB2F /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 82ACF4212060752700EECB2F /* art.scnassets */; };
 		82ACF4242060752700EECB2F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ACF4232060752700EECB2F /* GameViewController.swift */; };
@@ -46,16 +53,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7227681E20621F7C00037948 /* person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = person.png; sourceTree = "<group>"; };
+		722768202062223700037948 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		722768212062223800037948 /* achievements.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = achievements.png; sourceTree = "<group>"; };
+		722768222062223900037948 /* help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help.png; sourceTree = "<group>"; };
+		722768232062223900037948 /* volume.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = volume.png; sourceTree = "<group>"; };
+		722768282062224200037948 /* main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main.png; sourceTree = "<group>"; };
+		7227682A2062236E00037948 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		7227682C20622E1900037948 /* text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = text.png; sourceTree = "<group>"; };
+		722D61512062356600C99B3B /* asteroidbelt.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = asteroidbelt.gif; sourceTree = "<group>"; };
+		722D61522062356800C99B3B /* blast.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blast.jpeg; sourceTree = "<group>"; };
+		722D61552062379A00C99B3B /* trophy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trophy.png; sourceTree = "<group>"; };
+		722D615720623C3100C99B3B /* MandroidBB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MandroidBB.ttf; sourceTree = "<group>"; };
 		72648B8D2061A40C007034E8 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		72648B942061AC1D007034E8 /* Frijole-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Frijole-Regular.ttf"; path = "GalaxyRacerz/fonts/Frijole-Regular.ttf"; sourceTree = "<group>"; };
-		72648B9B2061AF36007034E8 /* spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaceship.png; sourceTree = "<group>"; };
-		72648BA12061B42B007034E8 /* signup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signup.png; sourceTree = "<group>"; };
-		72648BA22061B42B007034E8 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login.png; sourceTree = "<group>"; };
-		72648BA72061BA37007034E8 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		82A4DE8D2061BC1700AFCB1F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		82A4DE8F2061BC2700AFCB1F /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		82A4DE932061BF4900AFCB1F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		82A4DE952061C69B00AFCB1F /* arrowButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrowButton.png; path = GalaxyRacerz.xcodeproj/arrowButton.png; sourceTree = "<group>"; };
 		82ACF41C2060752700EECB2F /* GalaxyRacerz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GalaxyRacerz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82ACF41F2060752700EECB2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82ACF4212060752700EECB2F /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -100,7 +114,7 @@
 		82ACF4132060752700EECB2F = {
 			isa = PBXGroup;
 			children = (
-				82A4DE952061C69B00AFCB1F /* arrowButton.png */,
+				722D615720623C3100C99B3B /* MandroidBB.ttf */,
 				72648B942061AC1D007034E8 /* Frijole-Regular.ttf */,
 				82ACF41E2060752700EECB2F /* GalaxyRacerz */,
 				82ACF4352060752700EECB2F /* GalaxyRacerzTests */,
@@ -126,15 +140,22 @@
 				82ACF4212060752700EECB2F /* art.scnassets */,
 				82ACF4232060752700EECB2F /* GameViewController.swift */,
 				82ACF4252060752700EECB2F /* Main.storyboard */,
+				722D61552062379A00C99B3B /* trophy.png */,
+				722D61512062356600C99B3B /* asteroidbelt.gif */,
+				722D61522062356800C99B3B /* blast.jpeg */,
+				7227682C20622E1900037948 /* text.png */,
+				7227682A2062236E00037948 /* play.png */,
+				722768282062224200037948 /* main.png */,
+				722768212062223800037948 /* achievements.png */,
+				722768222062223900037948 /* help.png */,
+				722768202062223700037948 /* settings.png */,
+				722768232062223900037948 /* volume.png */,
+				7227681E20621F7C00037948 /* person.png */,
 				82A4DE8D2061BC1700AFCB1F /* LoginViewController.swift */,
 				82A4DE8F2061BC2700AFCB1F /* SignupViewController.swift */,
-				72648BA72061BA37007034E8 /* back.png */,
-				72648BA22061B42B007034E8 /* login.png */,
-				72648BA12061B42B007034E8 /* signup.png */,
 				82ACF44F2060799700EECB2F /* LoadScreenViewController.swift */,
 				82ACF4282060752700EECB2F /* Assets.xcassets */,
 				82A4DE932061BF4900AFCB1F /* User.swift */,
-				72648B9B2061AF36007034E8 /* spaceship.png */,
 				82ACF42D2060752700EECB2F /* Info.plist */,
 				72648B8D2061A40C007034E8 /* fonts */,
 			);
@@ -266,17 +287,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82A4DE962061C69B00AFCB1F /* arrowButton.png in Resources */,
+				722D615820623C3100C99B3B /* MandroidBB.ttf in Resources */,
+				722768242062223A00037948 /* settings.png in Resources */,
 				72648B952061AC1D007034E8 /* Frijole-Regular.ttf in Resources */,
-				72648B9C2061AF36007034E8 /* spaceship.png in Resources */,
 				82ACF4222060752700EECB2F /* art.scnassets in Resources */,
-				72648BA32061B42C007034E8 /* signup.png in Resources */,
-				72648BA42061B42C007034E8 /* login.png in Resources */,
+				722D61532062356900C99B3B /* asteroidbelt.gif in Resources */,
+				722D61542062356900C99B3B /* blast.jpeg in Resources */,
+				722768252062223A00037948 /* achievements.png in Resources */,
+				7227682D20622E1A00037948 /* text.png in Resources */,
 				82ACF4292060752700EECB2F /* Assets.xcassets in Resources */,
-				72648BA82061BA38007034E8 /* back.png in Resources */,
 				82ACF4272060752700EECB2F /* Main.storyboard in Resources */,
+				722768272062223A00037948 /* volume.png in Resources */,
+				722768262062223A00037948 /* help.png in Resources */,
+				722768292062224300037948 /* main.png in Resources */,
 				72648B8E2061A40C007034E8 /* fonts in Resources */,
 				72648B932061AACB007034E8 /* Info.plist in Resources */,
+				7227682B2062236E00037948 /* play.png in Resources */,
+				7227681F20621F7D00037948 /* person.png in Resources */,
+				722D61562062379B00C99B3B /* trophy.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

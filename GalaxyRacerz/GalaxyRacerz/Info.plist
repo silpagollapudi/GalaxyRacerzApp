@@ -46,6 +46,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Frijole-Regular.ttf</string>
+		<string>MandroidBB.ttf</string>
 	</array>
 </dict>
 </plist>
