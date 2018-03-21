@@ -1,2 +1,0 @@
-# GalaxyRacerz
-iOS project
