@@ -19,6 +19,7 @@
 		722D61542062356900C99B3B /* blast.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 722D61522062356800C99B3B /* blast.jpeg */; };
 		722D61562062379B00C99B3B /* trophy.png in Resources */ = {isa = PBXBuildFile; fileRef = 722D61552062379A00C99B3B /* trophy.png */; };
 		722D615820623C3100C99B3B /* MandroidBB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722D615720623C3100C99B3B /* MandroidBB.ttf */; };
+		722D615A206241E900C99B3B /* quit.png in Resources */ = {isa = PBXBuildFile; fileRef = 722D6159206241E800C99B3B /* quit.png */; };
 		72648B8E2061A40C007034E8 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 72648B8D2061A40C007034E8 /* fonts */; };
 		72648B932061AACB007034E8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82ACF42D2060752700EECB2F /* Info.plist */; };
 		72648B952061AC1D007034E8 /* Frijole-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72648B942061AC1D007034E8 /* Frijole-Regular.ttf */; };
@@ -65,6 +66,7 @@
 		722D61522062356800C99B3B /* blast.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blast.jpeg; sourceTree = "<group>"; };
 		722D61552062379A00C99B3B /* trophy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trophy.png; sourceTree = "<group>"; };
 		722D615720623C3100C99B3B /* MandroidBB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MandroidBB.ttf; sourceTree = "<group>"; };
+		722D6159206241E800C99B3B /* quit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quit.png; sourceTree = "<group>"; };
 		72648B8D2061A40C007034E8 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		72648B942061AC1D007034E8 /* Frijole-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Frijole-Regular.ttf"; path = "GalaxyRacerz/fonts/Frijole-Regular.ttf"; sourceTree = "<group>"; };
 		82A4DE8D2061BC1700AFCB1F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				82ACF4212060752700EECB2F /* art.scnassets */,
 				82ACF4232060752700EECB2F /* GameViewController.swift */,
 				82ACF4252060752700EECB2F /* Main.storyboard */,
+				722D6159206241E800C99B3B /* quit.png */,
 				722D61552062379A00C99B3B /* trophy.png */,
 				722D61512062356600C99B3B /* asteroidbelt.gif */,
 				722D61522062356800C99B3B /* blast.jpeg */,
@@ -299,6 +302,7 @@
 				82ACF4272060752700EECB2F /* Main.storyboard in Resources */,
 				722768272062223A00037948 /* volume.png in Resources */,
 				722768262062223A00037948 /* help.png in Resources */,
+				722D615A206241E900C99B3B /* quit.png in Resources */,
 				722768292062224300037948 /* main.png in Resources */,
 				72648B8E2061A40C007034E8 /* fonts in Resources */,
 				72648B932061AACB007034E8 /* Info.plist in Resources */,
