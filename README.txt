@@ -1,8 +1,8 @@
 Contributions:
 
 Silpa Gollapudi (33%)
- - Did all of the navigation screen(UI + button segues)
- - UI of navigation Screen
+ - navigation screen(UI + button segues)
+ - achievements screen
  - Worked on the username/password setup using user defaults + the login/signup screens
 
 Sheetal Poduri (33%)
