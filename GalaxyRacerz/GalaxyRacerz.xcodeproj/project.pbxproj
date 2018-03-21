@@ -21,6 +21,8 @@
 		722D615820623C3100C99B3B /* MandroidBB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722D615720623C3100C99B3B /* MandroidBB.ttf */; };
 		722D615A206241E900C99B3B /* quit.png in Resources */ = {isa = PBXBuildFile; fileRef = 722D6159206241E800C99B3B /* quit.png */; };
 		722D615C206245C500C99B3B /* space.png in Resources */ = {isa = PBXBuildFile; fileRef = 722D615B206245C300C99B3B /* space.png */; };
+		722D616220624B1F00C99B3B /* Desktop in Resources */ = {isa = PBXBuildFile; fileRef = 722D616120624B1F00C99B3B /* Desktop */; };
+		722D616520624BEC00C99B3B /* rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = 722D616420624BEC00C99B3B /* rocket.png */; };
 		72648B8E2061A40C007034E8 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 72648B8D2061A40C007034E8 /* fonts */; };
 		72648B932061AACB007034E8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82ACF42D2060752700EECB2F /* Info.plist */; };
 		72648B952061AC1D007034E8 /* Frijole-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72648B942061AC1D007034E8 /* Frijole-Regular.ttf */; };
@@ -69,6 +71,8 @@
 		722D615720623C3100C99B3B /* MandroidBB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MandroidBB.ttf; sourceTree = "<group>"; };
 		722D6159206241E800C99B3B /* quit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quit.png; sourceTree = "<group>"; };
 		722D615B206245C300C99B3B /* space.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = space.png; sourceTree = "<group>"; };
+		722D616120624B1F00C99B3B /* Desktop */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Desktop; sourceTree = "<group>"; };
+		722D616420624BEC00C99B3B /* rocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rocket.png; path = ../../../../Desktop/rocket.png; sourceTree = "<group>"; };
 		72648B8D2061A40C007034E8 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		72648B942061AC1D007034E8 /* Frijole-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Frijole-Regular.ttf"; path = "GalaxyRacerz/fonts/Frijole-Regular.ttf"; sourceTree = "<group>"; };
 		82A4DE8D2061BC1700AFCB1F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +148,7 @@
 				82ACF4212060752700EECB2F /* art.scnassets */,
 				82ACF4232060752700EECB2F /* GameViewController.swift */,
 				82ACF4252060752700EECB2F /* Main.storyboard */,
+				722D616120624B1F00C99B3B /* Desktop */,
 				722D615B206245C300C99B3B /* space.png */,
 				722D6159206241E800C99B3B /* quit.png */,
 				722D61552062379A00C99B3B /* trophy.png */,
@@ -160,6 +165,7 @@
 				82A4DE8D2061BC1700AFCB1F /* LoginViewController.swift */,
 				82A4DE8F2061BC2700AFCB1F /* SignupViewController.swift */,
 				82ACF44F2060799700EECB2F /* LoadScreenViewController.swift */,
+				722D616420624BEC00C99B3B /* rocket.png */,
 				82ACF4282060752700EECB2F /* Assets.xcassets */,
 				82A4DE932061BF4900AFCB1F /* User.swift */,
 				82ACF42D2060752700EECB2F /* Info.plist */,
@@ -306,9 +312,11 @@
 				722768272062223A00037948 /* volume.png in Resources */,
 				722768262062223A00037948 /* help.png in Resources */,
 				722D615C206245C500C99B3B /* space.png in Resources */,
+				722D616520624BEC00C99B3B /* rocket.png in Resources */,
 				722D615A206241E900C99B3B /* quit.png in Resources */,
 				722768292062224300037948 /* main.png in Resources */,
 				72648B8E2061A40C007034E8 /* fonts in Resources */,
+				722D616220624B1F00C99B3B /* Desktop in Resources */,
 				72648B932061AACB007034E8 /* Info.plist in Resources */,
 				7227682B2062236E00037948 /* play.png in Resources */,
 				7227681F20621F7D00037948 /* person.png in Resources */,
