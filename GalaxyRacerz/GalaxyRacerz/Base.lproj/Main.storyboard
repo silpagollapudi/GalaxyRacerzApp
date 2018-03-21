@@ -386,7 +386,7 @@
                                     <segue destination="fCH-6b-QCM" kind="show" identifier="showSettings" id="4oy-af-hhg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n0H-wW-jsY">
+                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n0H-wW-jsY">
                                 <rect key="frame" x="119" y="408" width="177" height="175"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="play"/>
@@ -595,6 +595,7 @@
         <image name="volume" width="150" height="126"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="IUC-69-CaT"/>
         <segue reference="CHD-mT-far"/>
         <segue reference="QdD-kM-n2t"/>
     </inferredMetricsTieBreakers>
