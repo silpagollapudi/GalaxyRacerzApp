@@ -24,7 +24,7 @@ class GameViewController: UIViewController {
         scene.rootNode.addChildNode(cameraNode)
         
         // place the camera
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 15)
+        cameraNode.position = SCNVector3(x: 0, y: 10, z: 31)
         
         // create and add a light to the scene
         let lightNode = SCNNode()
@@ -32,6 +32,9 @@ class GameViewController: UIViewController {
         lightNode.light!.type = .omni
         lightNode.position = SCNVector3(x: 0, y: 10, z: 10)
         scene.rootNode.addChildNode(lightNode)
+        
+        //set background of scene
+        scene.background.contents = UIImage(named: "space")
         
         // create and add an ambient light to the scene
         let ambientLightNode = SCNNode()
@@ -52,6 +55,10 @@ class GameViewController: UIViewController {
         // set the scene to the view
         scnView.scene = scene
         
+        //gesture
+        let moveBy = SCNAction.moveBy(x: 0, y: 1, z: 0, duration: 1)
+        ship.runAction(moveBy)
+        
         // allows the user to manipulate the camera
         scnView.allowsCameraControl = true
         
@@ -64,6 +71,27 @@ class GameViewController: UIViewController {
         // add a tap gesture recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
+        
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector(("handleSwipes:")))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector(("handleSwipes:")))
+        
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
+        
+        view.addGestureRecognizer(leftSwipe)
+        view.addGestureRecognizer(rightSwipe)
+        
+        func handleSwipes(sender:UISwipeGestureRecognizer) {
+            if (sender.direction == .left) {
+                print("Swipe Left")
+                ship.position = SCNVector3Make(4, 10, 5)
+            }
+            
+            if (sender.direction == .right) { 
+                print("Swipe Right")
+                ship.position = SCNVector3Make(-4, -5, -10)
+            }
+        }
     }
     
     @objc
