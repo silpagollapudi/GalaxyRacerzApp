@@ -104,10 +104,22 @@ class GameViewController: UIViewController {
             let result = hitResults[0]
             let node = result.node
             
-            let trans:SCNVector3 = scnView.unprojectPoint(SCNVector3Zero)
-            let pos:SCNVector3 = node.presentation.position
-            let newPos = 2 * ((trans.x) + (pos.x))
-            node.position.x = newPos
+            let projectedOrigin = scnView.projectPoint((node.position))
+            
+            //Location of the finger in the view on a 2D plane
+            let location2D = gestureRecognize.location(in: scnView)
+            
+            //Location of the finger in a 3D vector
+            let location3D = SCNVector3Make(Float(location2D.x), Float(location2D.y), projectedOrigin.z)
+            
+            //Unprojects a point from the 2D pixel coordinate system of the renderer to the 3D world coordinate system of the scene
+            let realLocation3D = scnView.unprojectPoint(location3D)
+            
+            if node.position != nil {
+                
+                //Only updating Y axis position 
+                node.position = SCNVector3Make(realLocation3D.x, (node.position.y), (node.position.z))
+            }
             
             // get its material
             let material = result.node.geometry!.firstMaterial!
