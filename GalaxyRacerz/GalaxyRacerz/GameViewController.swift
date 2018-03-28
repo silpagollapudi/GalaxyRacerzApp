@@ -11,15 +11,27 @@ import QuartzCore
 import SceneKit
 
 class GameViewController: UIViewController {
-
+    
+    let cameraNode = SCNNode()
+    var cameraCurrentZoomScale = 10.0
+    var positionX: Float = 0.0
+    var positionY: Float = 0.0
+    var lastPositionX: Float = 0.0
+    var lastPositionY: Float = 0.0
+    var maxXPositionRight: Float = 4.0
+    var maxXPositionLeft: Float = -4.0
+    var maxYPositionUp: Float = 3.0
+    var maxYPositionDown: Float = -3.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // create a new scene
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        
+        //let cameraNode = SCNNode()
+
         // create and add a camera to the scene
-        let cameraNode = SCNNode()
+        //let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         scene.rootNode.addChildNode(cameraNode)
         
@@ -68,34 +80,18 @@ class GameViewController: UIViewController {
         // configure the view
         scnView.backgroundColor = UIColor.black
         
-        // add a tap gesture recognizer
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        let tapGesture = UIPanGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        
+        scnView.isUserInteractionEnabled = true
         scnView.addGestureRecognizer(tapGesture)
         
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector(("handleSwipes:")))
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector(("handleSwipes:")))
+        let trans2D:CGPoint = tapGesture.translation(in:self.view)
+        let transPoint3D:SCNVector3 = SCNVector3Make(Float(trans2D.x), Float(trans2D.y), Float(0))
         
-        leftSwipe.direction = .left
-        rightSwipe.direction = .right
-        
-        view.addGestureRecognizer(leftSwipe)
-        view.addGestureRecognizer(rightSwipe)
-        
-        func handleSwipes(sender:UISwipeGestureRecognizer) {
-            if (sender.direction == .left) {
-                print("Swipe Left")
-                ship.position = SCNVector3Make(4, 10, 5)
-            }
-            
-            if (sender.direction == .right) { 
-                print("Swipe Right")
-                ship.position = SCNVector3Make(-4, -5, -10)
-            }
-        }
     }
     
     @objc
-    func handleTap(_ gestureRecognize: UIGestureRecognizer) {
+    func handleTap(_ gestureRecognize: UIPanGestureRecognizer) {
         // retrieve the SCNView
         let scnView = self.view as! SCNView
         
@@ -106,6 +102,12 @@ class GameViewController: UIViewController {
         if hitResults.count > 0 {
             // retrieved the first clicked object
             let result = hitResults[0]
+            let node = result.node
+            
+            let trans:SCNVector3 = scnView.unprojectPoint(SCNVector3Zero)
+            let pos:SCNVector3 = node.presentation.position
+            let newPos = 2 * ((trans.x) + (pos.x))
+            node.position.x = newPos
             
             // get its material
             let material = result.node.geometry!.firstMaterial!
