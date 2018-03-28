@@ -12,43 +12,35 @@ import SceneKit
 
 class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     
+    var ship = SCNNode()
+    var asteroid = SCNNode()
+    var scene = SCNScene()
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         // create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        //let cameraNode = SCNNode()
-        let cameraNode = SCNNode()
+        scene = SCNScene(named: "art.scnassets/ship.scn")!
+        scene.physicsWorld.contactDelegate = self
 
-        // create and add a camera to the scene
-        //let cameraNode = SCNNode()
-        cameraNode.camera = SCNCamera()
-        scene.rootNode.addChildNode(cameraNode)
-        // place the camera
+        //creates and adds camera node to scene
+        createCameraAndLight()
         
-        cameraNode.position = SCNVector3(x: 0, y: 10, z: 31)
-        //cameraNode.position = SCNVector3(x: 0, y: 0, z: 0)
-        // create and add a light to the scene
-        let lightNode = SCNNode()
-        lightNode.light = SCNLight()
-        lightNode.light!.type = .omni
-        lightNode.position = SCNVector3(x: 0, y: 10, z: 10)
-        scene.rootNode.addChildNode(lightNode)
         //set background of scene
         scene.background.contents = UIImage(named: "space")
         
-        // create and add an ambient light to the scene
-        let ambientLightNode = SCNNode()
-        ambientLightNode.light = SCNLight()
-        ambientLightNode.light!.type = .ambient
-        ambientLightNode.light!.color = UIColor.darkGray
-        scene.rootNode.addChildNode(ambientLightNode)
         // retrieve the ship node
-        let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
-        // animate the 3d object
+        ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
         
         //adds asteroid object
-        let asteroid = createAsteroid(scene: scene)
+        asteroid = createAsteroid(scene: scene)
         
+        ship.physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
+        // detects interaction between asteroids and ship
+        asteroid.physicsBody!.categoryBitMask = 2
+        ship.physicsBody!.categoryBitMask = 1 
+        asteroid.physicsBody!.contactTestBitMask = 1
+
         // retrieve the SCNView
         let scnView = self.view as! SCNView 
         
@@ -63,24 +55,56 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         scnView.allowsCameraControl = true
         
         // show statistics such as fps and timing information
-        scnView.showsStatistics = true
+        scnView.showsStatistics = false
         
         // configure the view
         scnView.backgroundColor = UIColor.black
         
         let tapGesture = UIPanGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        
         scnView.isUserInteractionEnabled = true
         scnView.addGestureRecognizer(tapGesture)
         
+    }
+    
+    func createCameraAndLight() {
+        //let cameraNode = SCNNode()
+        let cameraNode = SCNNode()
+        
+        // create and add a camera to the scene
+        //let cameraNode = SCNNode()
+        cameraNode.camera = SCNCamera()
+        scene.rootNode.addChildNode(cameraNode)
+        // place the camera
+        
+        cameraNode.position = SCNVector3(x: 0, y: 10, z: 31)
+        //cameraNode.position = SCNVector3(x: 0, y: 0, z: 0)
+        // create and add a light to the scene
+        let lightNode = SCNNode()
+        lightNode.light = SCNLight()
+        lightNode.light!.type = .omni
+        lightNode.position = SCNVector3(x: 0, y: 10, z: 10)
+        scene.rootNode.addChildNode(lightNode)
+        
+        // create and add an ambient light to the scene
+        let ambientLightNode = SCNNode()
+        ambientLightNode.light = SCNLight()
+        ambientLightNode.light!.type = .ambient
+        ambientLightNode.light!.color = UIColor.darkGray
+        scene.rootNode.addChildNode(ambientLightNode)
+    }
+    
+    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+        print("HERE")
+        if (contact.nodeA == ship || contact.nodeA == asteroid) && (contact.nodeB == ship || contact.nodeB == asteroid) {
+            ship.removeFromParentNode()
+        }
     }
     
     func createAsteroid(scene: SCNScene) -> SCNNode {
         let sphere = SCNSphere(radius: 3)
         let sphereNode = SCNNode(geometry: sphere)
         sphereNode.position = SCNVector3(0.0, 10.0, -20.0)
-        var body = SCNPhysicsBody(type: .dynamic, shape: nil)
-        body = SCNPhysicsBody.dynamic()
+        let body = SCNPhysicsBody(type: .dynamic, shape: nil)
         sphereNode.physicsBody = body
         sphereNode.physicsBody?.velocity = SCNVector3(0,0,18)
         scene.rootNode.addChildNode(sphereNode)
