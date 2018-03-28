@@ -10,41 +10,29 @@ import UIKit
 import QuartzCore
 import SceneKit
 
-class GameViewController: UIViewController {
-    
-    let cameraNode = SCNNode()
-    var cameraCurrentZoomScale = 10.0
-    var positionX: Float = 0.0
-    var positionY: Float = 0.0
-    var lastPositionX: Float = 0.0
-    var lastPositionY: Float = 0.0
-    var maxXPositionRight: Float = 4.0
-    var maxXPositionLeft: Float = -4.0
-    var maxYPositionUp: Float = 3.0
-    var maxYPositionDown: Float = -3.0
+class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // create a new scene
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
         //let cameraNode = SCNNode()
+        let cameraNode = SCNNode()
 
         // create and add a camera to the scene
         //let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         scene.rootNode.addChildNode(cameraNode)
-        
         // place the camera
-        cameraNode.position = SCNVector3(x: 0, y: 10, z: 31)
         
+        cameraNode.position = SCNVector3(x: 0, y: 10, z: 31)
+        //cameraNode.position = SCNVector3(x: 0, y: 0, z: 0)
         // create and add a light to the scene
         let lightNode = SCNNode()
         lightNode.light = SCNLight()
         lightNode.light!.type = .omni
         lightNode.position = SCNVector3(x: 0, y: 10, z: 10)
         scene.rootNode.addChildNode(lightNode)
-        
         //set background of scene
         scene.background.contents = UIImage(named: "space")
         
@@ -54,15 +42,15 @@ class GameViewController: UIViewController {
         ambientLightNode.light!.type = .ambient
         ambientLightNode.light!.color = UIColor.darkGray
         scene.rootNode.addChildNode(ambientLightNode)
-        
         // retrieve the ship node
         let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
-        
         // animate the 3d object
-        //ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2, z: 0, duration: 1)))
+        
+        //adds asteroid object
+        let asteroid = createAsteroid(scene: scene)
         
         // retrieve the SCNView
-        let scnView = self.view as! SCNView
+        let scnView = self.view as! SCNView 
         
         // set the scene to the view
         scnView.scene = scene
@@ -85,9 +73,18 @@ class GameViewController: UIViewController {
         scnView.isUserInteractionEnabled = true
         scnView.addGestureRecognizer(tapGesture)
         
-        let trans2D:CGPoint = tapGesture.translation(in:self.view)
-        let transPoint3D:SCNVector3 = SCNVector3Make(Float(trans2D.x), Float(trans2D.y), Float(0))
-        
+    }
+    
+    func createAsteroid(scene: SCNScene) -> SCNNode {
+        let sphere = SCNSphere(radius: 3)
+        let sphereNode = SCNNode(geometry: sphere)
+        sphereNode.position = SCNVector3(0.0, 10.0, -20.0)
+        var body = SCNPhysicsBody(type: .dynamic, shape: nil)
+        body = SCNPhysicsBody.dynamic()
+        sphereNode.physicsBody = body
+        sphereNode.physicsBody?.velocity = SCNVector3(0,0,18)
+        scene.rootNode.addChildNode(sphereNode)
+        return sphereNode
     }
     
     @objc
@@ -115,11 +112,8 @@ class GameViewController: UIViewController {
             //Unprojects a point from the 2D pixel coordinate system of the renderer to the 3D world coordinate system of the scene
             let realLocation3D = scnView.unprojectPoint(location3D)
             
-            if node.position != nil {
-                
-                //Only updating Y axis position 
-                node.position = SCNVector3Make(realLocation3D.x, (node.position.y), (node.position.z))
-            }
+            //Only updating Y axis position
+            node.position = SCNVector3Make(realLocation3D.x, (node.position.y), (node.position.z))
             
             // get its material
             let material = result.node.geometry!.firstMaterial!
