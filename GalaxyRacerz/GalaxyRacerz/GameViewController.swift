@@ -13,7 +13,6 @@ import SceneKit
 class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     
     var ship = SCNNode()
-    var asteroid = SCNNode()
     var scene = SCNScene()
     var gameOver = false
     let queue = DispatchQueue.global()
@@ -21,6 +20,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     var time = TimeInterval()
     var spawnTime: TimeInterval = 0
     var leftOrRight = false
+    var asteroidID = 2
     
     override func viewDidLoad() {
         
@@ -40,12 +40,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         
         ship.physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
         
-        //asteroid = createAsteroid(scene: scene)
-        
         // detects interaction between asteroids and ship
         ship.physicsBody!.categoryBitMask = 1
-//        asteroid.physicsBody!.categoryBitMask = 2
-//        asteroid.physicsBody!.contactTestBitMask = 1
         
         // retrieve the SCNView
         let scnView = self.view as! SCNView 
@@ -78,7 +74,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                     self.time = -self.date.timeIntervalSinceNow
                     if(self.time > self.spawnTime) {
                         DispatchQueue.main.async {
-                            self.asteroid = self.createAsteroid(scene: self.scene)
+                            self.createAsteroid(scene: self.scene)
                         }
                         self.spawnTime = self.time + TimeInterval(arc4random_uniform(6) + 1);
                     }
@@ -114,7 +110,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     }
     
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
-        if (contact.nodeA == ship || contact.nodeA == asteroid) && (contact.nodeB == ship || contact.nodeB == asteroid) {
+        if (contact.nodeA == ship || contact.nodeA.physicsBody?.categoryBitMask == asteroidID) && (contact.nodeB == ship || contact.nodeB.physicsBody?.categoryBitMask == asteroidID) {
             ship.removeFromParentNode()
             gameOver = true
         }
@@ -137,9 +133,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         sphereNode.physicsBody?.velocity = SCNVector3(0, 0, 58)
         scene.rootNode.addChildNode(sphereNode)
         
-        self.asteroid = sphereNode
-        self.asteroid.physicsBody!.categoryBitMask = 2
-        self.asteroid.physicsBody!.contactTestBitMask = 1
+        sphereNode.physicsBody!.categoryBitMask = asteroidID
+        sphereNode.physicsBody!.contactTestBitMask = 1
         
         return sphereNode
     }
