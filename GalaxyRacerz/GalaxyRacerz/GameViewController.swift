@@ -21,6 +21,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     var spawnTime: TimeInterval = 0
     var leftOrRight = false
     var asteroidID = 2
+    var asteroid = SCNNode()
+    var asteroidScene = SCNScene()
     
     override func viewDidLoad() {
         
@@ -28,6 +30,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         // create a new scene
         scene = SCNScene(named: "art.scnassets/ship.scn")!
         scene.physicsWorld.contactDelegate = self
+        
+        asteroidScene = SCNScene(named: "art.scnassets/asteroid.scn")!
+        asteroidScene.physicsWorld.contactDelegate = self
+        asteroid = asteroidScene.rootNode.childNode(withName: "asteroid", recursively: true)!
         
         //creates and adds camera node to scene
         createCameraAndLight()
@@ -74,7 +80,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                     self.time = -self.date.timeIntervalSinceNow
                     if(self.time > self.spawnTime) {
                         DispatchQueue.main.async {
-                            self.createAsteroid(scene: self.scene)
+                            self.createAsteroid()
                         }
                         self.spawnTime = self.time + TimeInterval(arc4random_uniform(6) + 1);
                     }
@@ -116,9 +122,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         }
     }
     
-    func createAsteroid(scene: SCNScene) -> SCNNode {
-        let sphere = SCNSphere(radius: 2)
-        let sphereNode = SCNNode(geometry: sphere)
+    func createAsteroid() {
+        //let sphere = SCNSphere(radius: 2)
+        //let sphereNode = SCNNode(geometry: sphere)
+        let newAsteroid = asteroid.clone()
         var xCoord = 0
         if(leftOrRight) {
             xCoord = Int(arc4random_uniform(8) + 1)
@@ -127,16 +134,15 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
             xCoord = -1 * Int(arc4random_uniform(8))
         }
         leftOrRight = !leftOrRight
-        sphereNode.position = SCNVector3(Double(xCoord), 5.0, -60.0)
+        newAsteroid.position = SCNVector3(Double(xCoord), 5.0, -92.0)
         let body = SCNPhysicsBody(type: .dynamic, shape: nil)
-        sphereNode.physicsBody = body
-        sphereNode.physicsBody?.velocity = SCNVector3(0, 0, 58)
-        scene.rootNode.addChildNode(sphereNode)
+        newAsteroid.physicsBody = body
+        newAsteroid.physicsBody?.velocity = SCNVector3(0, 0, 70)
+        scene.rootNode.addChildNode(newAsteroid)
         
-        sphereNode.physicsBody!.categoryBitMask = asteroidID
-        sphereNode.physicsBody!.contactTestBitMask = 1
+        newAsteroid.physicsBody!.categoryBitMask = asteroidID
+        newAsteroid.physicsBody!.contactTestBitMask = 1
         
-        return sphereNode
     }
     
     @objc
