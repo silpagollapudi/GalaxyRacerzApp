@@ -10,6 +10,8 @@ import UIKit
 
 class GameOverViewController: UIViewController {
 
+    var tempScoreLabel = String()
+    
     @IBOutlet weak var scoreLabel: UILabel!
     
     @IBAction func replayButtonPressed(_ sender: Any) {
@@ -18,7 +20,7 @@ class GameOverViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        scoreLabel.text = tempScoreLabel
         // Do any additional setup after loading the view.
     }
 

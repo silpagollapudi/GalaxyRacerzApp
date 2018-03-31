@@ -272,7 +272,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         if segue.identifier == "GameOverSegue",
             let destination = segue.destination as? GameOverViewController {
             
-            destination.scoreLabel.text = String(score)
+            destination.tempScoreLabel = String(score)
             
         }
         
