@@ -16,6 +16,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     var scene = SCNScene()
     var gameOver = false
     let queue = DispatchQueue.global()
+    let queue2 = DispatchQueue(label: "scoreQueue", qos: .userInitiated)
     var date = Date()
     var time = TimeInterval()
     var spawnTime: TimeInterval = 0
@@ -23,6 +24,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     var asteroidID = 2
     var asteroid = SCNNode()
     var asteroidScene = SCNScene()
+    var scoreUI = SCNText(string: "0", extrusionDepth: 0.0)
+    var scoreNode = SCNNode()
     
     override func viewDidLoad() {
         
@@ -49,6 +52,11 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         // detects interaction between asteroids and ship
         ship.physicsBody!.categoryBitMask = 1
         
+        scoreUI.font = UIFont(name: "MandroidBB", size: 20)
+        scoreNode = SCNNode(geometry: scoreUI)
+        scoreNode.position = SCNVector3(x: -4.5, y: 40, z: -60)
+        scene.rootNode.addChildNode(scoreNode)
+        
         // retrieve the SCNView
         let scnView = self.view as! SCNView 
         
@@ -72,21 +80,31 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     
     var done = false
     var contact = SCNPhysicsContact()
+    var score = 0
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         if(!gameOver) {
             queue.async {
                 while(!self.gameOver) {
                     self.time = -self.date.timeIntervalSinceNow
+                    self.updateScore()
+                    self.scoreUI.string = NSString(format:"%d", self.score) as String
                     if(self.time > self.spawnTime) {
                         DispatchQueue.main.async {
                             self.createAsteroid()
                             self.createPlanet(scene: self.scene)
                         }
-                        self.spawnTime = self.time + TimeInterval(arc4random_uniform(6) + 1);
+                        self.spawnTime = self.time + TimeInterval(arc4random_uniform(8) + 1);
                     }
                 }
             }
+        }
+    }
+    
+    func updateScore() {
+        queue2.async {
+            sleep(2)
+            self.score += 2
         }
     }
     
@@ -127,8 +145,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     }
     
     func createAsteroid() {
-        //let sphere = SCNSphere(radius: 2)
-        //let sphereNode = SCNNode(geometry: sphere)
         let newAsteroid = asteroid.clone()
         var xCoord = 0
         if(leftOrRight) {
@@ -256,7 +272,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         if segue.identifier == "GameOverSegue",
             let destination = segue.destination as? GameOverViewController {
             
-            // destination.scoreLabel.text = score
+            destination.scoreLabel.text = String(score)
             
         }
         

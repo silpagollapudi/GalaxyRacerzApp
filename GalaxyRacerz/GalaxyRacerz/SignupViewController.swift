@@ -43,7 +43,6 @@ class SignupViewController: UIViewController {
             defaults.set(passId, forKey: kUsername)
         }
         
-        
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
