@@ -81,6 +81,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                     if(self.time > self.spawnTime) {
                         DispatchQueue.main.async {
                             self.createAsteroid()
+                            self.createPlanet(scene: self.scene)
                         }
                         self.spawnTime = self.time + TimeInterval(arc4random_uniform(6) + 1);
                     }
@@ -143,6 +144,30 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         newAsteroid.physicsBody!.categoryBitMask = asteroidID
         newAsteroid.physicsBody!.contactTestBitMask = 1
         
+    }
+    
+    func createPlanet(scene: SCNScene) -> SCNNode {
+        let sphere = SCNSphere(radius: 1.5)
+        let sphereNode = SCNNode(geometry: sphere)
+        sphereNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named:"earth.png")
+        var xCoord = 0
+        if(leftOrRight) {
+            xCoord = Int(arc4random_uniform(8) + 1)
+        }
+        else {
+            xCoord = -1 * Int(arc4random_uniform(8))
+        }
+        leftOrRight = !leftOrRight
+        sphereNode.position = SCNVector3(Double(xCoord), 5.0, -60.0)
+        let body = SCNPhysicsBody(type: .dynamic, shape: nil)
+        sphereNode.physicsBody = body
+        sphereNode.physicsBody?.velocity = SCNVector3(0, 0, 58)
+        scene.rootNode.addChildNode(sphereNode)
+        
+        sphereNode.physicsBody!.categoryBitMask = asteroidID
+        sphereNode.physicsBody!.contactTestBitMask = 1
+        
+        return sphereNode
     }
     
     @objc

@@ -10,6 +10,7 @@
 		722D615820623C3100C99B3B /* MandroidBB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722D615720623C3100C99B3B /* MandroidBB.ttf */; };
 		722D616220624B1F00C99B3B /* Desktop in Resources */ = {isa = PBXBuildFile; fileRef = 722D616120624B1F00C99B3B /* Desktop */; };
 		722D61682062CF3200C99B3B /* asteroidbelt.gif in Resources */ = {isa = PBXBuildFile; fileRef = 722D61672062CF3200C99B3B /* asteroidbelt.gif */; };
+		724619A4206F072A007B4E25 /* earth.png in Resources */ = {isa = PBXBuildFile; fileRef = 724619A3206F072A007B4E25 /* earth.png */; };
 		72648B8E2061A40C007034E8 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 72648B8D2061A40C007034E8 /* fonts */; };
 		72648B932061AACB007034E8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82ACF42D2060752700EECB2F /* Info.plist */; };
 		72648B952061AC1D007034E8 /* Frijole-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72648B942061AC1D007034E8 /* Frijole-Regular.ttf */; };
@@ -47,6 +48,7 @@
 		722D615720623C3100C99B3B /* MandroidBB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MandroidBB.ttf; sourceTree = "<group>"; };
 		722D616120624B1F00C99B3B /* Desktop */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Desktop; sourceTree = "<group>"; };
 		722D61672062CF3200C99B3B /* asteroidbelt.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = asteroidbelt.gif; sourceTree = "<group>"; };
+		724619A3206F072A007B4E25 /* earth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = earth.png; path = GalaxyRacerz.xcodeproj/earth.png; sourceTree = "<group>"; };
 		72648B8D2061A40C007034E8 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		72648B942061AC1D007034E8 /* Frijole-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Frijole-Regular.ttf"; path = "GalaxyRacerz/fonts/Frijole-Regular.ttf"; sourceTree = "<group>"; };
 		82A4DE8D2061BC1700AFCB1F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 		82ACF4132060752700EECB2F = {
 			isa = PBXGroup;
 			children = (
+				724619A3206F072A007B4E25 /* earth.png */,
 				722D61672062CF3200C99B3B /* asteroidbelt.gif */,
 				722D615720623C3100C99B3B /* MandroidBB.ttf */,
 				72648B942061AC1D007034E8 /* Frijole-Regular.ttf */,
@@ -260,6 +263,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				724619A4206F072A007B4E25 /* earth.png in Resources */,
 				722D61682062CF3200C99B3B /* asteroidbelt.gif in Resources */,
 				722D615820623C3100C99B3B /* MandroidBB.ttf in Resources */,
 				72648B952061AC1D007034E8 /* Frijole-Regular.ttf in Resources */,
