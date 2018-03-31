@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5DA67BB72070247F00561E2E /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA67BB62070247F00561E2E /* GameOverViewController.swift */; };
 		722D615820623C3100C99B3B /* MandroidBB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722D615720623C3100C99B3B /* MandroidBB.ttf */; };
 		722D616220624B1F00C99B3B /* Desktop in Resources */ = {isa = PBXBuildFile; fileRef = 722D616120624B1F00C99B3B /* Desktop */; };
 		722D61682062CF3200C99B3B /* asteroidbelt.gif in Resources */ = {isa = PBXBuildFile; fileRef = 722D61672062CF3200C99B3B /* asteroidbelt.gif */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5DA67BB62070247F00561E2E /* GameOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
 		722D615720623C3100C99B3B /* MandroidBB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MandroidBB.ttf; sourceTree = "<group>"; };
 		722D616120624B1F00C99B3B /* Desktop */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Desktop; sourceTree = "<group>"; };
 		722D61672062CF3200C99B3B /* asteroidbelt.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = asteroidbelt.gif; sourceTree = "<group>"; };
@@ -124,16 +126,17 @@
 			children = (
 				82ACF41F2060752700EECB2F /* AppDelegate.swift */,
 				82ACF4212060752700EECB2F /* art.scnassets */,
-				82ACF4232060752700EECB2F /* GameViewController.swift */,
 				82ACF4252060752700EECB2F /* Main.storyboard */,
 				722D616120624B1F00C99B3B /* Desktop */,
 				82A4DE8D2061BC1700AFCB1F /* LoginViewController.swift */,
 				82A4DE8F2061BC2700AFCB1F /* SignupViewController.swift */,
+				82ACF4232060752700EECB2F /* GameViewController.swift */,
 				82ACF44F2060799700EECB2F /* LoadScreenViewController.swift */,
 				82ACF4282060752700EECB2F /* Assets.xcassets */,
 				82A4DE932061BF4900AFCB1F /* User.swift */,
 				82ACF42D2060752700EECB2F /* Info.plist */,
 				72648B8D2061A40C007034E8 /* fonts */,
+				5DA67BB62070247F00561E2E /* GameOverViewController.swift */,
 			);
 			path = GalaxyRacerz;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				82ACF4242060752700EECB2F /* GameViewController.swift in Sources */,
 				82A4DE942061BF4900AFCB1F /* User.swift in Sources */,
 				82A4DE902061BC2700AFCB1F /* SignupViewController.swift in Sources */,
+				5DA67BB72070247F00561E2E /* GameOverViewController.swift in Sources */,
 				82ACF4502060799700EECB2F /* LoadScreenViewController.swift in Sources */,
 				82ACF4202060752700EECB2F /* AppDelegate.swift in Sources */,
 			);

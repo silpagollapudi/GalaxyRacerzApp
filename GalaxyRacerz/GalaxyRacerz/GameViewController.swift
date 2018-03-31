@@ -120,6 +120,9 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         if (contact.nodeA == ship || contact.nodeA.physicsBody?.categoryBitMask == asteroidID) && (contact.nodeB == ship || contact.nodeB.physicsBody?.categoryBitMask == asteroidID) {
             ship.removeFromParentNode()
             gameOver = true
+            DispatchQueue.main.sync {
+                performSegue(withIdentifier: "GameOverSegue", sender: AnyClass.self)
+            }
         }
     }
     
@@ -241,5 +244,24 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
+    
+    
+    
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+        if segue.identifier == "GameOverSegue",
+            let destination = segue.destination as? GameOverViewController {
+            
+            // destination.scoreLabel.text = score
+            
+        }
+        
+     }
+     
+
 
 }

@@ -27,10 +27,86 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </sceneKitView>
+                    <connections>
+                        <segue destination="Rsf-ad-Kka" kind="show" identifier="GameOverSegue" id="raF-YW-oSq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="112" y="1278"/>
+            <point key="canvasLocation" x="112" y="1317"/>
+        </scene>
+        <!--Game Over View Controller-->
+        <scene sceneID="plr-cx-vsB">
+            <objects>
+                <viewController id="Rsf-ad-Kka" customClass="GameOverViewController" customModule="GalaxyRacerz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YiR-Cu-Jt2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="space" translatesAutoresizingMaskIntoConstraints="NO" id="21c-PX-5dJ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N6n-FL-QPy">
+                                <rect key="frame" x="105" y="569" width="205" height="84"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Frijole" family="Frijole" pointSize="39"/>
+                                <state key="normal" title="Menu">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="replayButtonPressed:" destination="Rsf-ad-Kka" eventType="touchUpInside" id="RdP-kb-qZ8"/>
+                                    <segue destination="GnW-o6-Ne4" kind="show" id="kMo-rh-9Hv"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="56" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DER-eN-8uE">
+                                <rect key="frame" x="153" y="311" width="109" height="68"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Frijole" family="Frijole" pointSize="34"/>
+                                <color key="textColor" red="0.93878886421319796" green="0.18767019441839147" blue="0.1626374033506458" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="asteroidbelt.gif" translatesAutoresizingMaskIntoConstraints="NO" id="Atl-n2-DQk">
+                                <rect key="frame" x="3" y="64" width="409" height="152"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game Over" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OHq-rF-5mn">
+                                <rect key="frame" x="33" y="93" width="348" height="95"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Frijole" family="Frijole" pointSize="45"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mp2-uc-U1o">
+                                <rect key="frame" x="105" y="237" width="205" height="95"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Frijole" family="Frijole" pointSize="45"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gKs-TT-wV2">
+                                <rect key="frame" x="105" y="477" width="205" height="84"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Frijole" family="Frijole" pointSize="39"/>
+                                <state key="normal" title="Replay">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="replayButtonPressed:" destination="Rsf-ad-Kka" eventType="touchUpInside" id="oEX-OQ-GMs"/>
+                                    <segue destination="BV1-FR-VrT" kind="show" id="I0V-Ck-gn8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="Fnt-18-SJT"/>
+                    </view>
+                    <connections>
+                        <outlet property="scoreLabel" destination="DER-eN-8uE" id="iJa-oB-LWU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EPL-dg-BMI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="111.59420289855073" y="2105.7065217391305"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="A1R-fO-hqf">
@@ -580,7 +656,8 @@
         <image name="volume" width="150" height="126"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5Sc-A0-5Sq"/>
-        <segue reference="JVK-5g-DYB"/>
+        <segue reference="kMo-rh-9Hv"/>
+        <segue reference="QdD-kM-n2t"/>
+        <segue reference="I0V-Ck-gn8"/>
     </inferredMetricsTieBreakers>
 </document>
