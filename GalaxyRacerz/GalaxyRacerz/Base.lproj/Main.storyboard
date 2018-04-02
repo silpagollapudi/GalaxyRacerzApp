@@ -33,7 +33,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="112" y="1317"/>
+            <point key="canvasLocation" x="3" y="1072"/>
         </scene>
         <!--Game Over View Controller-->
         <scene sceneID="plr-cx-vsB">
@@ -106,7 +106,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EPL-dg-BMI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="111.59420289855073" y="2105.7065217391305"/>
+            <point key="canvasLocation" x="-1062" y="1414"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="A1R-fO-hqf">
@@ -534,6 +534,26 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ed-3I-PNI">
+                                <rect key="frame" x="20" y="339" width="173" height="134"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="blackShip.png"/>
+                            </button>
+                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cif-Ug-ijG">
+                                <rect key="frame" x="225" y="338" width="169" height="134"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="purpleShip.png"/>
+                            </button>
+                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJ5-Yd-ksY">
+                                <rect key="frame" x="20" y="515" width="173" height="130"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="yellowShip.png"/>
+                            </button>
+                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="04n-Ao-CnU">
+                                <rect key="frame" x="225" y="515" width="169" height="130"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="greenShip.png"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="6l0-oQ-tP6"/>
@@ -643,17 +663,21 @@
         <image name="arrowButton-1" width="146" height="138"/>
         <image name="asteroidbelt.gif" width="1000" height="250"/>
         <image name="back" width="116" height="94"/>
+        <image name="blackShip.png" width="494" height="376"/>
+        <image name="greenShip.png" width="704" height="478"/>
         <image name="help" width="136" height="130"/>
         <image name="login" width="546" height="242"/>
         <image name="main" width="112" height="122"/>
         <image name="person" width="342" height="380"/>
         <image name="play" width="182" height="172"/>
+        <image name="purpleShip.png" width="532" height="350"/>
         <image name="rocket" width="512" height="512"/>
         <image name="settings" width="132" height="134"/>
         <image name="signup" width="534" height="240"/>
         <image name="space" width="434" height="686"/>
         <image name="spaceship" width="512" height="512"/>
         <image name="volume" width="150" height="126"/>
+        <image name="yellowShip.png" width="474" height="366"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="kMo-rh-9Hv"/>

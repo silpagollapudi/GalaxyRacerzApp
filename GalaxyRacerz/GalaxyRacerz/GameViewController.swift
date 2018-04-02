@@ -50,13 +50,15 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
         
         ship.physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
+        //scene.geometry?.firstMaterial?.diffuse.contents = UIColor.red
         
         // detects interaction between asteroids and ship
         ship.physicsBody!.categoryBitMask = 1
         
         scoreUI.font = UIFont(name: "MandroidBB", size: 20)
+        scoreUI.firstMaterial?.diffuse.contents = UIColor.red
         scoreNode = SCNNode(geometry: scoreUI)
-        scoreNode.position = SCNVector3(x: -4.5, y: 40, z: -60)
+        scoreNode.position = SCNVector3(x: -6, y: 25, z: -60)
         scene.rootNode.addChildNode(scoreNode)
         
         // retrieve the SCNView
@@ -95,9 +97,11 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                     if(self.time > self.spawnTime) {
                         DispatchQueue.main.async {
                             self.createAsteroid()
-                            self.createPlanet(scene: self.scene)
+                            self.createEarth(scene: self.scene)
+                            self.createUranus(scene: self.scene)
+                            self.createJupiter(scene: self.scene)
                         }
-                        self.spawnTime = self.time + TimeInterval(arc4random_uniform(14) + 1);
+                        self.spawnTime = self.time + TimeInterval(arc4random_uniform(20) + 1);
                     }
                 }
             }
@@ -152,9 +156,15 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
             } else {
                 contact.nodeB.removeFromParentNode()
             }
-            //self.updateScore(increment: 10)
             score = score + 10
             
+        } else if (contact.nodeA == ship || contact.nodeA.physicsBody?.categoryBitMask == planetID) && (contact.nodeB == ship || contact.nodeB.physicsBody?.categoryBitMask == planetID) {
+            if (contact.nodeA.physicsBody?.categoryBitMask == planetID) {
+                contact.nodeA.removeFromParentNode()
+            } else {
+                contact.nodeB.removeFromParentNode()
+            }
+            score = score - 5
         }
     }
     
@@ -179,8 +189,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         
     }
     
-    func createPlanet(scene: SCNScene) {
-        let sphere = SCNSphere(radius: 1.5)
+    func createEarth(scene: SCNScene) {
+        let sphere = SCNSphere(radius: 2)
         let sphereNode = SCNNode(geometry: sphere)
         sphereNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named:"earth.png")
         var xCoord = 0
@@ -199,7 +209,50 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         
         sphereNode.physicsBody!.categoryBitMask = earthID
         sphereNode.physicsBody!.contactTestBitMask = 1
+    }
     
+    func createUranus(scene: SCNScene) {
+        let sphere = SCNSphere(radius: 1.5)
+        let sphereNode = SCNNode(geometry: sphere)
+        sphereNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named:"Uranus.png")
+        var xCoord = 0
+        if(leftOrRight) {
+            xCoord = Int(arc4random_uniform(8) + 1)
+        }
+        else {
+            xCoord = -1 * Int(arc4random_uniform(8))
+        }
+        leftOrRight = !leftOrRight
+        sphereNode.position = SCNVector3(Double(xCoord), 5.0, -60.0)
+        let body = SCNPhysicsBody(type: .dynamic, shape: nil)
+        sphereNode.physicsBody = body
+        sphereNode.physicsBody?.velocity = SCNVector3(0, 0, 58)
+        scene.rootNode.addChildNode(sphereNode)
+        
+        sphereNode.physicsBody!.categoryBitMask = planetID
+        sphereNode.physicsBody!.contactTestBitMask = 1
+    }
+    
+    func createJupiter(scene: SCNScene) {
+        let sphere = SCNSphere(radius: 3)
+        let sphereNode = SCNNode(geometry: sphere)
+        sphereNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named:"Jupiter.png")
+        var xCoord = 0
+        if(leftOrRight) {
+            xCoord = Int(arc4random_uniform(8) + 1)
+        }
+        else {
+            xCoord = -1 * Int(arc4random_uniform(8))
+        }
+        leftOrRight = !leftOrRight
+        sphereNode.position = SCNVector3(Double(xCoord), 5.0, -60.0)
+        let body = SCNPhysicsBody(type: .dynamic, shape: nil)
+        sphereNode.physicsBody = body
+        sphereNode.physicsBody?.velocity = SCNVector3(0, 0, 58)
+        scene.rootNode.addChildNode(sphereNode)
+        
+        sphereNode.physicsBody!.categoryBitMask = planetID
+        sphereNode.physicsBody!.contactTestBitMask = 1
     }
     
     @objc
