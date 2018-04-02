@@ -19,7 +19,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     let queue2 = DispatchQueue(label: "scoreQueue", qos: .userInitiated)
     var date = Date()
     var time = TimeInterval()
-    var spawnTime: TimeInterval = 0
+    var asteroidSpawnTime: TimeInterval = 0
+    var earthSpawnTime: TimeInterval = 0
+    var jupiterSpawnTime: TimeInterval = 0
+    var uranusSpawnTime: TimeInterval = 0
     var leftOrRight = false
     var asteroidID = 2
     var earthID = 3
@@ -94,14 +97,29 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                     self.time = -self.date.timeIntervalSinceNow
                     self.updateScore(increment: 2)
                     self.scoreUI.string = NSString(format:"%d", self.score) as String
-                    if(self.time > self.spawnTime) {
+                    if(self.time > self.asteroidSpawnTime) {
                         DispatchQueue.main.async {
                             self.createAsteroid()
+                        }
+                        self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(8) + 1);
+                    }
+                    else if(self.time > self.earthSpawnTime) {
+                        DispatchQueue.main.async {
                             self.createEarth(scene: self.scene)
+                        }
+                        self.earthSpawnTime = self.time + TimeInterval(arc4random_uniform(20) + 1);
+                    }
+                    else if(self.time > self.uranusSpawnTime) {
+                        DispatchQueue.main.async {
                             self.createUranus(scene: self.scene)
+                        }
+                        self.uranusSpawnTime = self.time + TimeInterval(arc4random_uniform(15) + 1);
+                    }
+                    else if(self.time > self.jupiterSpawnTime) {
+                        DispatchQueue.main.async {
                             self.createJupiter(scene: self.scene)
                         }
-                        self.spawnTime = self.time + TimeInterval(arc4random_uniform(20) + 1);
+                        self.jupiterSpawnTime = self.time + TimeInterval(arc4random_uniform(10) + 1);
                     }
                 }
             }
@@ -143,8 +161,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         if (contact.nodeA == ship || contact.nodeA.physicsBody?.categoryBitMask == asteroidID) && (contact.nodeB == ship || contact.nodeB.physicsBody?.categoryBitMask == asteroidID) {
-            ship.removeFromParentNode()
             gameOver = true
+            ship.removeFromParentNode()
             DispatchQueue.main.sync {
                 performSegue(withIdentifier: "GameOverSegue", sender: AnyClass.self)
             }
