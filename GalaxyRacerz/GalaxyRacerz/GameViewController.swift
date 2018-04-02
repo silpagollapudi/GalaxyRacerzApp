@@ -22,6 +22,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     var spawnTime: TimeInterval = 0
     var leftOrRight = false
     var asteroidID = 2
+    var earthID = 3
+    var planetID = 4
     var asteroid = SCNNode()
     var asteroidScene = SCNScene()
     var scoreUI = SCNText(string: "0", extrusionDepth: 0.0)
@@ -81,30 +83,31 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     var done = false
     var contact = SCNPhysicsContact()
     var score = 0
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         if(!gameOver) {
             queue.async {
                 while(!self.gameOver) {
                     self.time = -self.date.timeIntervalSinceNow
-                    self.updateScore()
+                    self.updateScore(increment: 2)
                     self.scoreUI.string = NSString(format:"%d", self.score) as String
                     if(self.time > self.spawnTime) {
                         DispatchQueue.main.async {
                             self.createAsteroid()
                             self.createPlanet(scene: self.scene)
                         }
-                        self.spawnTime = self.time + TimeInterval(arc4random_uniform(8) + 1);
+                        self.spawnTime = self.time + TimeInterval(arc4random_uniform(14) + 1);
                     }
                 }
             }
         }
     }
     
-    func updateScore() {
+    func updateScore(increment: Int) {
         queue2.async {
             sleep(2)
-            self.score += 2
+            self.score += increment
         }
     }
     
@@ -142,6 +145,17 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                 performSegue(withIdentifier: "GameOverSegue", sender: AnyClass.self)
             }
         }
+        
+        else if (contact.nodeA == ship || contact.nodeA.physicsBody?.categoryBitMask == earthID) && (contact.nodeB == ship || contact.nodeB.physicsBody?.categoryBitMask == earthID) {
+            if (contact.nodeA.physicsBody?.categoryBitMask == earthID) {
+                contact.nodeA.removeFromParentNode()
+            } else {
+                contact.nodeB.removeFromParentNode()
+            }
+            //self.updateScore(increment: 10)
+            score = score + 10
+            
+        }
     }
     
     func createAsteroid() {
@@ -165,7 +179,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         
     }
     
-    func createPlanet(scene: SCNScene) -> SCNNode {
+    func createPlanet(scene: SCNScene) {
         let sphere = SCNSphere(radius: 1.5)
         let sphereNode = SCNNode(geometry: sphere)
         sphereNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named:"earth.png")
@@ -183,10 +197,9 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         sphereNode.physicsBody?.velocity = SCNVector3(0, 0, 58)
         scene.rootNode.addChildNode(sphereNode)
         
-        sphereNode.physicsBody!.categoryBitMask = asteroidID
+        sphereNode.physicsBody!.categoryBitMask = earthID
         sphereNode.physicsBody!.contactTestBitMask = 1
-        
-        return sphereNode
+    
     }
     
     @objc
