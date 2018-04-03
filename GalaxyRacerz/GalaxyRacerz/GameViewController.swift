@@ -169,10 +169,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         objc_sync_exit(obj)
     }
     
-    var mutex = 1
+    //var mutex = 1
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         if (contact.nodeA == ship || contact.nodeA.physicsBody?.categoryBitMask == asteroidID) && (contact.nodeB == ship || contact.nodeB.physicsBody?.categoryBitMask == asteroidID) {
-            lock(obj: mutex as AnyObject) {
+            //lock(obj: mutex as AnyObject) {
                 let particleSystem = SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)
                 let systemNode = SCNNode()
                 systemNode.addParticleSystem(particleSystem!)
@@ -184,7 +184,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                     self.ship.removeFromParentNode()
                     self.performSegue(withIdentifier: "GameOverSegue", sender:AnyClass.self)
                 })
-            }
+            //}
         }
         
         else if (contact.nodeA == ship || contact.nodeA.physicsBody?.categoryBitMask == earthID) && (contact.nodeB == ship || contact.nodeB.physicsBody?.categoryBitMask == earthID) {
@@ -305,9 +305,9 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
             if hitResults.count > 0 {
                 // retrieved the first clicked object
                 let result = hitResults[0]
-                let node = result.node
+                //let node = result.node
                 
-                let projectedOrigin = scnView.projectPoint((node.position))
+                let projectedOrigin = scnView.projectPoint((ship.position))
                 
                 //Location of the finger in the view on a 2D plane
                 let location2D = gestureRecognize.location(in: scnView)
@@ -319,7 +319,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                 let realLocation3D = scnView.unprojectPoint(location3D)
                 
                 //Only updating X axis position
-                ship.position = SCNVector3(realLocation3D.x, (node.position.y), (node.position.z))
+                ship.position = SCNVector3(realLocation3D.x, (ship.position.y), (ship.position.z))
                 
                 // get its material
                 let material = result.node.geometry!.firstMaterial!
