@@ -159,12 +159,21 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         scene.rootNode.addChildNode(ambientLightNode)
     }
     
+    func lock(obj: AnyObject, blk:() -> ()) {
+        objc_sync_enter(obj)
+        blk()
+        objc_sync_exit(obj)
+    }
+    
+    var mutex = 1
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         if (contact.nodeA == ship || contact.nodeA.physicsBody?.categoryBitMask == asteroidID) && (contact.nodeB == ship || contact.nodeB.physicsBody?.categoryBitMask == asteroidID) {
-            gameOver = true
-            ship.removeFromParentNode()
-            DispatchQueue.main.sync {
-                performSegue(withIdentifier: "GameOverSegue", sender: AnyClass.self)
+            lock(obj: mutex as AnyObject) {
+                gameOver = true
+                ship.removeFromParentNode()
+                DispatchQueue.main.sync {
+                    performSegue(withIdentifier: "GameOverSegue", sender: AnyClass.self)
+                }
             }
         }
         
@@ -275,52 +284,37 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     
     @objc
     func handleTap(_ gestureRecognize: UIPanGestureRecognizer) {
-        // retrieve the SCNView
-        let scnView = self.view as! SCNView
+        if(!gameOver) {
+            // retrieve the SCNView
+            let scnView = self.view as! SCNView
         
-        // check what nodes are tapped
-        let p = gestureRecognize.location(in: scnView)
-        let hitResults = scnView.hitTest(p, options: [:])
-        // check that we clicked on at least one object
-        if hitResults.count > 0 {
-            // retrieved the first clicked object
-            let result = hitResults[0]
-            let node = result.node
-            
-            let projectedOrigin = scnView.projectPoint((node.position))
-            
-            //Location of the finger in the view on a 2D plane
-            let location2D = gestureRecognize.location(in: scnView)
-            
-            //Location of the finger in a 3D vector
-            let location3D = SCNVector3(Float(location2D.x), Float(location2D.y), projectedOrigin.z)
-            
-            //Unprojects a point from the 2D pixel coordinate system of the renderer to the 3D world coordinate system of the scene
-            let realLocation3D = scnView.unprojectPoint(location3D)
-            
-            //Only updating X axis position
-            ship.position = SCNVector3(realLocation3D.x, (node.position.y), (node.position.z))
-            
-            // get its material
-            let material = result.node.geometry!.firstMaterial!
-            
-            // highlight it
-            SCNTransaction.begin()
-            SCNTransaction.animationDuration = 0.5
-            
-            // on completion - unhighlight
-            SCNTransaction.completionBlock = {
-                SCNTransaction.begin()
-                SCNTransaction.animationDuration = 0.5
+            // check what nodes are tapped
+            let p = gestureRecognize.location(in: scnView)
+            let hitResults = scnView.hitTest(p, options: [:])
+            // check that we clicked on at least one object
+            if hitResults.count > 0 {
+                // retrieved the first clicked object
+                let result = hitResults[0]
+                let node = result.node
                 
-                material.emission.contents = UIColor.black
+                let projectedOrigin = scnView.projectPoint((node.position))
                 
-                SCNTransaction.commit()
+                //Location of the finger in the view on a 2D plane
+                let location2D = gestureRecognize.location(in: scnView)
+                
+                //Location of the finger in a 3D vector
+                let location3D = SCNVector3(Float(location2D.x), Float(location2D.y), projectedOrigin.z)
+                
+                //Unprojects a point from the 2D pixel coordinate system of the renderer to the 3D world coordinate system of the scene
+                let realLocation3D = scnView.unprojectPoint(location3D)
+                
+                //Only updating X axis position
+                ship.position = SCNVector3(realLocation3D.x, (node.position.y), (node.position.z))
+                
+                // get its material
+                let material = result.node.geometry!.firstMaterial!
+                
             }
-            
-            material.emission.contents = UIColor.red
-            
-            SCNTransaction.commit()
         }
     }
     
