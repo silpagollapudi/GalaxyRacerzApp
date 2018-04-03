@@ -14,6 +14,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     
     var ship = SCNNode()
     var scene = SCNScene()
+    var scnView = SCNView()
     var gameOver = false
     let queue = DispatchQueue.global()
     let queue2 = DispatchQueue(label: "scoreQueue", qos: .userInitiated)
@@ -65,10 +66,13 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         scene.rootNode.addChildNode(scoreNode)
         
         // retrieve the SCNView
-        let scnView = self.view as! SCNView 
+        scnView = self.view as! SCNView
         
         // set the scene to the view
         scnView.scene = scene
+        
+        //eplosion
+        scnView.scene?.physicsWorld.contactDelegate = self
         
         // allows the user to manipulate the camera
         scnView.allowsCameraControl = true
@@ -169,11 +173,17 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         if (contact.nodeA == ship || contact.nodeA.physicsBody?.categoryBitMask == asteroidID) && (contact.nodeB == ship || contact.nodeB.physicsBody?.categoryBitMask == asteroidID) {
             lock(obj: mutex as AnyObject) {
+                let particleSystem = SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)
+                let systemNode = SCNNode()
+                systemNode.addParticleSystem(particleSystem!)
+                systemNode.position = contact.nodeA.position
+                scnView.scene?.rootNode.addChildNode(systemNode)
                 gameOver = true
                 ship.removeFromParentNode()
-                DispatchQueue.main.sync {
-                    performSegue(withIdentifier: "GameOverSegue", sender: AnyClass.self)
-                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.75, execute: {
+                    self.ship.removeFromParentNode()
+                    self.performSegue(withIdentifier: "GameOverSegue", sender:AnyClass.self)
+                })
             }
         }
         
