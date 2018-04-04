@@ -22,6 +22,10 @@
 		72648B8E2061A40C007034E8 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 72648B8D2061A40C007034E8 /* fonts */; };
 		72648B932061AACB007034E8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82ACF42D2060752700EECB2F /* Info.plist */; };
 		72648B952061AC1D007034E8 /* Frijole-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72648B942061AC1D007034E8 /* Frijole-Regular.ttf */; };
+		729AF00C2074A8EA00D053A8 /* textureBlack.png in Resources */ = {isa = PBXBuildFile; fileRef = 729AF0082074A8DA00D053A8 /* textureBlack.png */; };
+		729AF00D2074A8EA00D053A8 /* textureYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 729AF0092074A8DB00D053A8 /* textureYellow.png */; };
+		729AF00E2074A8EA00D053A8 /* texturePurple.png in Resources */ = {isa = PBXBuildFile; fileRef = 729AF00A2074A8E100D053A8 /* texturePurple.png */; };
+		729AF00F2074A8EA00D053A8 /* textureGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 729AF00B2074A8E600D053A8 /* textureGreen.png */; };
 		82A4DE8E2061BC1700AFCB1F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A4DE8D2061BC1700AFCB1F /* LoginViewController.swift */; };
 		82A4DE902061BC2700AFCB1F /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A4DE8F2061BC2700AFCB1F /* SignupViewController.swift */; };
 		82A4DE942061BF4900AFCB1F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A4DE932061BF4900AFCB1F /* User.swift */; };
@@ -67,6 +71,10 @@
 		724619A3206F072A007B4E25 /* earth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = earth.png; path = GalaxyRacerz.xcodeproj/earth.png; sourceTree = "<group>"; };
 		72648B8D2061A40C007034E8 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		72648B942061AC1D007034E8 /* Frijole-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Frijole-Regular.ttf"; path = "GalaxyRacerz/fonts/Frijole-Regular.ttf"; sourceTree = "<group>"; };
+		729AF0082074A8DA00D053A8 /* textureBlack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textureBlack.png; sourceTree = "<group>"; };
+		729AF0092074A8DB00D053A8 /* textureYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textureYellow.png; sourceTree = "<group>"; };
+		729AF00A2074A8E100D053A8 /* texturePurple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texturePurple.png; sourceTree = "<group>"; };
+		729AF00B2074A8E600D053A8 /* textureGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textureGreen.png; sourceTree = "<group>"; };
 		82A4DE8D2061BC1700AFCB1F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		82A4DE8F2061BC2700AFCB1F /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		82A4DE932061BF4900AFCB1F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -141,6 +149,10 @@
 				82ACF41F2060752700EECB2F /* AppDelegate.swift */,
 				82ACF4212060752700EECB2F /* art.scnassets */,
 				82ACF4252060752700EECB2F /* Main.storyboard */,
+				729AF0082074A8DA00D053A8 /* textureBlack.png */,
+				729AF00B2074A8E600D053A8 /* textureGreen.png */,
+				729AF00A2074A8E100D053A8 /* texturePurple.png */,
+				729AF0092074A8DB00D053A8 /* textureYellow.png */,
 				721BF7192072CE3900B3BE20 /* blackShip.png */,
 				721BF7172072CE3600B3BE20 /* greenShip.png */,
 				721BF7182072CE3700B3BE20 /* purpleShip.png */,
@@ -288,12 +300,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				724619A4206F072A007B4E25 /* earth.png in Resources */,
+				729AF00E2074A8EA00D053A8 /* texturePurple.png in Resources */,
 				721BF71E2072CE3C00B3BE20 /* yellowShip.png in Resources */,
 				721BF72420732FEA00B3BE20 /* Explosion.scnp in Resources */,
 				722D61682062CF3200C99B3B /* asteroidbelt.gif in Resources */,
+				729AF00D2074A8EA00D053A8 /* textureYellow.png in Resources */,
 				722D615820623C3100C99B3B /* MandroidBB.ttf in Resources */,
 				72648B952061AC1D007034E8 /* Frijole-Regular.ttf in Resources */,
 				82ACF4222060752700EECB2F /* art.scnassets in Resources */,
+				729AF00C2074A8EA00D053A8 /* textureBlack.png in Resources */,
+				729AF00F2074A8EA00D053A8 /* textureGreen.png in Resources */,
 				721BF7162072CA4900B3BE20 /* Jupiter.png in Resources */,
 				721BF71B2072CE3C00B3BE20 /* greenShip.png in Resources */,
 				721BF71D2072CE3C00B3BE20 /* blackShip.png in Resources */,
