@@ -32,14 +32,15 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     var asteroidScene = SCNScene()
     var scoreUI = SCNText(string: "0", extrusionDepth: 0.0)
     var scoreNode = SCNNode()
-    
+    var image = UIImage(named: "texture")
+
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         // create a new scene
+        let defaults = UserDefaults.standard
         scene = SCNScene(named: "art.scnassets/ship.scn")!
         scene.physicsWorld.contactDelegate = self
-        
+        scene.physicsWorld.gravity = SCNVector3(0, 0, 0)
         asteroidScene = SCNScene(named: "art.scnassets/asteroid.scn")!
         asteroidScene.physicsWorld.contactDelegate = self
         asteroid = asteroidScene.rootNode.childNode(withName: "asteroid", recursively: true)!
@@ -56,10 +57,15 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         ship.physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
         
         // change ship color
-        let image = UIImage(named: "textureYellow")
-        let shipColor = scene.rootNode.childNode(withName: "shipMesh", recursively: true)!
-        let material = shipColor.geometry?.firstMaterial!
-        material?.diffuse.contents = image
+        if(defaults.object(forKey: "shipColor") == nil || defaults.object(forKey: "shipColor") as! String == "texture") {
+            defaults.set("texture", forKey: "shipColor")
+        }
+        else {
+            let shipColor = scene.rootNode.childNode(withName: "shipMesh", recursively: true)!
+            let material = shipColor.geometry?.firstMaterial!
+            let color = defaults.object(forKey: "shipColor")
+            material?.diffuse.contents = UIImage(named: color as! String)
+        }
         
         // detects interaction between asteroids and ship
         ship.physicsBody!.categoryBitMask = 1
@@ -110,25 +116,33 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                         DispatchQueue.main.async {
                             self.createAsteroid()
                         }
-                        self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(8) + 1);
+                        if(self.score > 20) {
+                            self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(1) + 1);
+                        }
+                        else if (self.score > 10) {
+                            self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(2) + 1); 
+                        }
+                        else {
+                            self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(5) + 1);
+                        }
                     }
                     else if(self.time > self.earthSpawnTime) {
                         DispatchQueue.main.async {
                             self.createEarth(scene: self.scene)
                         }
-                        self.earthSpawnTime = self.time + TimeInterval(arc4random_uniform(20) + 1);
+                        self.earthSpawnTime = self.time + TimeInterval(arc4random_uniform(30) + 1);
                     }
                     else if(self.time > self.uranusSpawnTime) {
                         DispatchQueue.main.async {
                             self.createUranus(scene: self.scene)
                         }
-                        self.uranusSpawnTime = self.time + TimeInterval(arc4random_uniform(15) + 1);
+                        self.uranusSpawnTime = self.time + TimeInterval(arc4random_uniform(20) + 1);
                     }
                     else if(self.time > self.jupiterSpawnTime) {
                         DispatchQueue.main.async {
                             self.createJupiter(scene: self.scene)
                         }
-                        self.jupiterSpawnTime = self.time + TimeInterval(arc4random_uniform(10) + 1);
+                        self.jupiterSpawnTime = self.time + TimeInterval(arc4random_uniform(20) + 1);
                     }
                 }
             }
@@ -223,7 +237,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         newAsteroid.position = SCNVector3(Double(xCoord), 5.0, -92.0)
         let body = SCNPhysicsBody(type: .dynamic, shape: nil)
         newAsteroid.physicsBody = body
-        newAsteroid.physicsBody?.velocity = SCNVector3(0, 0, 70)
+        newAsteroid.physicsBody?.velocity = SCNVector3(0, -6, 70)
         scene.rootNode.addChildNode(newAsteroid)
         
         newAsteroid.physicsBody!.categoryBitMask = asteroidID
@@ -246,7 +260,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         sphereNode.position = SCNVector3(Double(xCoord), 5.0, -60.0)
         let body = SCNPhysicsBody(type: .dynamic, shape: nil)
         sphereNode.physicsBody = body
-        sphereNode.physicsBody?.velocity = SCNVector3(0, 0, 58)
+        sphereNode.physicsBody?.velocity = SCNVector3(0, -6, 58)
         scene.rootNode.addChildNode(sphereNode)
         
         sphereNode.physicsBody!.categoryBitMask = earthID
@@ -268,7 +282,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         sphereNode.position = SCNVector3(Double(xCoord), 5.0, -60.0)
         let body = SCNPhysicsBody(type: .dynamic, shape: nil)
         sphereNode.physicsBody = body
-        sphereNode.physicsBody?.velocity = SCNVector3(0, 0, 58)
+        sphereNode.physicsBody?.velocity = SCNVector3(0, -6, 58)
         scene.rootNode.addChildNode(sphereNode)
         
         sphereNode.physicsBody!.categoryBitMask = planetID
@@ -290,7 +304,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         sphereNode.position = SCNVector3(Double(xCoord), 5.0, -60.0)
         let body = SCNPhysicsBody(type: .dynamic, shape: nil)
         sphereNode.physicsBody = body
-        sphereNode.physicsBody?.velocity = SCNVector3(0, 0, 58)
+        sphereNode.physicsBody?.velocity = SCNVector3(0, -6, 58)
         scene.rootNode.addChildNode(sphereNode)
         
         sphereNode.physicsBody!.categoryBitMask = planetID

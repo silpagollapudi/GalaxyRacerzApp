@@ -13,7 +13,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var userInputText: UITextField!
     @IBOutlet weak var passInputText: UITextField!
     
-
     @IBAction func arrowButtonPressed(_ sender: Any) {
  
         let defaults = UserDefaults.standard

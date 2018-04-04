@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XuO-3g-ZSb">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -419,10 +419,10 @@
             </objects>
             <point key="canvasLocation" x="-775.36231884057975" y="-213.58695652173915"/>
         </scene>
-        <!--View Controller-->
+        <!--Menu View Controller-->
         <scene sceneID="UYN-HI-be1">
             <objects>
-                <viewController id="GnW-o6-Ne4" sceneMemberID="viewController">
+                <viewController id="GnW-o6-Ne4" customClass="MenuViewController" customModule="GalaxyRacerz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WPh-dx-saJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -503,10 +503,10 @@
             </objects>
             <point key="canvasLocation" x="111.59420289855073" y="242.93478260869568"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="AoT-tT-BUb">
             <objects>
-                <viewController id="fCH-6b-QCM" sceneMemberID="viewController">
+                <viewController id="fCH-6b-QCM" customClass="SettingsViewController" customModule="GalaxyRacerz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YXb-5b-U7H">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -538,21 +538,49 @@
                                 <rect key="frame" x="20" y="339" width="173" height="134"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="blackShip.png"/>
+                                <connections>
+                                    <action selector="selectBlackShip:" destination="fCH-6b-QCM" eventType="touchUpInside" id="odm-nl-0ZV"/>
+                                    <segue destination="GnW-o6-Ne4" kind="show" id="anN-vA-PWy"/>
+                                </connections>
                             </button>
                             <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cif-Ug-ijG">
                                 <rect key="frame" x="225" y="338" width="169" height="134"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="purpleShip.png"/>
+                                <connections>
+                                    <action selector="selectPurpleShip:" destination="fCH-6b-QCM" eventType="touchUpInside" id="Lyo-Bb-8MZ"/>
+                                    <segue destination="GnW-o6-Ne4" kind="show" id="GqO-Ex-tJz"/>
+                                </connections>
                             </button>
                             <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJ5-Yd-ksY">
                                 <rect key="frame" x="20" y="515" width="173" height="130"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="yellowShip.png"/>
+                                <connections>
+                                    <action selector="selectYellowShip:" destination="fCH-6b-QCM" eventType="touchUpInside" id="qGR-ww-h6H"/>
+                                    <segue destination="GnW-o6-Ne4" kind="show" id="hbS-V9-G1T"/>
+                                </connections>
                             </button>
                             <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="04n-Ao-CnU">
                                 <rect key="frame" x="225" y="515" width="169" height="130"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="greenShip.png"/>
+                                <connections>
+                                    <action selector="selectGreenShip:" destination="fCH-6b-QCM" eventType="touchUpInside" id="eNf-jR-kLl"/>
+                                    <segue destination="GnW-o6-Ne4" kind="show" id="rD3-Kq-xFF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyZ-bs-IYU">
+                                <rect key="frame" x="115" y="185" width="185" height="145"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Frijole" family="Frijole" pointSize="30"/>
+                                <state key="normal" title="red/blue">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="selectDefaultShip:" destination="fCH-6b-QCM" eventType="touchUpInside" id="MBt-fC-3Wy"/>
+                                    <segue destination="GnW-o6-Ne4" kind="show" id="AnO-8v-kEk"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -680,8 +708,8 @@
         <image name="yellowShip.png" width="474" height="366"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CHD-mT-far"/>
+        <segue reference="YID-qk-tsK"/>
         <segue reference="QdD-kM-n2t"/>
-        <segue reference="I0V-Ck-gn8"/>
+        <segue reference="rzQ-xJ-bCJ"/>
     </inferredMetricsTieBreakers>
 </document>
