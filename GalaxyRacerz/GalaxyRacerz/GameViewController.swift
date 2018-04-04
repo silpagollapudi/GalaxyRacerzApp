@@ -54,7 +54,12 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
         
         ship.physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
-        //scene.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+        
+        // change ship color
+        let image = UIImage(named: "textureYellow")
+        let shipColor = scene.rootNode.childNode(withName: "shipMesh", recursively: true)!
+        let material = shipColor.geometry?.firstMaterial!
+        material?.diffuse.contents = image
         
         // detects interaction between asteroids and ship
         ship.physicsBody!.categoryBitMask = 1
@@ -320,9 +325,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                 
                 //Only updating X axis position
                 ship.position = SCNVector3(realLocation3D.x, (ship.position.y), (ship.position.z))
-                
-                // get its material
-                let material = result.node.geometry!.firstMaterial!
                 
             }
         }
