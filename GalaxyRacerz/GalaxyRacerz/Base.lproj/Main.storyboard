@@ -108,10 +108,10 @@
             </objects>
             <point key="canvasLocation" x="-1062" y="1414"/>
         </scene>
-        <!--View Controller-->
+        <!--Achievements View Controller-->
         <scene sceneID="A1R-fO-hqf">
             <objects>
-                <viewController id="BkY-fq-DBY" sceneMemberID="viewController">
+                <viewController id="BkY-fq-DBY" customClass="AchievementsViewController" customModule="GalaxyRacerz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0lJ-Nr-wwc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -120,6 +120,13 @@
                                 <rect key="frame" x="-13" y="0.0" width="430" height="736"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="High Score" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAy-AK-H1b">
+                                <rect key="frame" x="69" y="242" width="276" height="94"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Frijole" family="Frijole" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LkF-fq-xUK">
                                 <rect key="frame" x="-13" y="0.0" width="86" height="84"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -139,10 +146,20 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="56" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w4C-6R-L6D">
+                                <rect key="frame" x="69" y="344" width="293" height="129"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="MandroidBB" family="Mandroid BB" pointSize="39"/>
+                                <color key="textColor" red="0.93878886419999996" green="0.18767019439999999" blue="0.16263740339999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="gUN-IX-ZUi"/>
                     </view>
+                    <connections>
+                        <outlet property="highScoreLabel" destination="w4C-6R-L6D" id="anI-dI-BL7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fBP-xS-Aof" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -703,8 +720,8 @@
         <image name="yellowShip.png" width="474" height="366"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5Sc-A0-5Sq"/>
+        <segue reference="7dg-e4-1dQ"/>
         <segue reference="JVK-5g-DYB"/>
-        <segue reference="rzQ-xJ-bCJ"/>
+        <segue reference="I0V-Ck-gn8"/>
     </inferredMetricsTieBreakers>
 </document>

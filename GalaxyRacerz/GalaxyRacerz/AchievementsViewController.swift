@@ -1,39 +1,30 @@
 //
-//  GameOverViewController.swift
+//  AchievementsViewController.swift
 //  GalaxyRacerz
 //
-//  Created by Sheetal Poduri on 3/31/18.
+//  Created by Sheetal Poduri on 4/13/18.
 //  Copyright © 2018 patel. All rights reserved.
 //
 
 import UIKit
 
-class GameOverViewController: UIViewController {
+class AchievementsViewController: UIViewController {
 
-    var tempScoreLabel = String()
-    
-    @IBOutlet weak var scoreLabel: UILabel!
-    
-    @IBAction func replayButtonPressed(_ sender: Any) {
-    }
-    
+    @IBOutlet weak var highScoreLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scoreLabel.text = tempScoreLabel
+
+        // Do any additional setup after loading the view.
         
         let defaults = UserDefaults.standard
         let kHighScore = "highScore"
 
-        let retrievedHighScore = defaults.integer(forKey: kHighScore)
+        let retrievedHighScore = String(describing: defaults.object(forKey: kHighScore))
         
-        let scoreInt:Int = Int(scoreLabel.text!)!
+        highScoreLabel.text = retrievedHighScore
         
-        if (scoreInt > retrievedHighScore) {
-            defaults.set(scoreLabel.text, forKey: kHighScore)
-            
-        }
-        // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {

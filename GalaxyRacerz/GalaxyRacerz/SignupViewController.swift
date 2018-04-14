@@ -29,6 +29,10 @@ class SignupViewController: UIViewController {
         let passId = passwordTextField.text!
         let kUsername = userId
         
+        // initialize high score to zero
+        let kHighScore = "highScore"
+        defaults.set(0, forKey: kHighScore)
+        
         if(userId.trimmingCharacters(in: .whitespaces).isEmpty || passId.trimmingCharacters(in: .whitespaces).isEmpty) {
             let alert = UIAlertController(title:"Signup Error", message:"One or more field is blank", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "dismiss", style: .default, handler:nil))
