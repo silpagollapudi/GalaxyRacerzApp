@@ -9,9 +9,73 @@
 import UIKit
 import QuartzCore
 import SceneKit
+import MultipeerConnectivity
 
-class GameViewController: UIViewController, SCNPhysicsContactDelegate {
+//let appDelegate = UIApplication.shared.delegate as! AppDelegate
+var peerID: MCPeerID!
+var mcSession: MCSession!
+var mcAdvertiserAssistant: MCAdvertiserAssistant!
+
+class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate {
     
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true)
+    }
+    
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true)
+    }
+    
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+    }
+    
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+    }
+    
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+    }
+    
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        switch state { 
+        case MCSessionState.connected:
+            startGame()
+        
+        case MCSessionState.connecting:
+            print("Connecting: \(peerID.displayName)")
+            
+        case MCSessionState.notConnected:
+            print("Not Connected: \(peerID.displayName)")
+        }
+    }
+    
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        DispatchQueue.main.async { [unowned self] in
+            if let opponentPosition = NSKeyedUnarchiver.unarchiveObject(with: data) as? Array<Float> {
+                self.oppShip.position.x = Float(opponentPosition[0])
+                self.oppShip.position.y = Float(opponentPosition[1])
+                self.oppShip.position.z = Float(opponentPosition[2])
+            }
+            else if let a = NSKeyedUnarchiver.unarchiveObject(with: data) as? Array<Float> {
+                self.createAsteroidWithLocation(x: a[0], y: a[1], z: a[2])
+            }
+        }
+    }
+    
+    func sendMyPosition(x: Float, y: Float, z: Float) {
+        let myPos = [x, y, z]
+        let data = NSKeyedArchiver.archivedData(withRootObject: myPos)
+        if (mcSession?.connectedPeers.count)! > 0 {
+            do {
+                try  mcSession.send(data, toPeers:  mcSession.connectedPeers, with: .reliable)
+            } catch let error as NSError {
+                let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                present(ac, animated: true)
+            }
+        }
+    }
+    
+    var oppShip = SCNNode()
     var ship = SCNNode()
     var scene = SCNScene()
     var scnView = SCNView()
@@ -33,13 +97,17 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     var jupiterNode = SCNNode()
     var uranusNode = SCNNode()
     var asteroidScene = SCNScene()
-    var scoreUI = SCNText(string: "0", extrusionDepth: 0.0)
     var scoreNode = SCNNode()
     var image = UIImage(named: "texture")
-
+    var isHost = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // create a new scene
+        peerID = MCPeerID(displayName: UIDevice.current.name)
+        mcSession = MCSession(peer:  peerID, securityIdentity: nil, encryptionPreference: .none)
+        mcSession.delegate = self
+        
         let defaults = UserDefaults.standard
         scene = SCNScene(named: "art.scnassets/ship.scn")!
         scene.physicsWorld.contactDelegate = self
@@ -66,6 +134,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         
         // retrieve the ship node
         ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
+        oppShip = ship.flattenedClone()
+        scene.rootNode.addChildNode(oppShip)
+        let oldPos = ship.position.y
+        oppShip.position.y = oldPos + 5
         
         ship.physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
         
@@ -83,9 +155,9 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         // detects interaction between asteroids and ship
         ship.physicsBody!.categoryBitMask = 1
         
-        scoreUI.font = UIFont(name: "MandroidBB", size: 20)
-        scoreUI.firstMaterial?.diffuse.contents = UIColor.red
-        scoreNode = SCNNode(geometry: scoreUI)
+        //scoreUI.font = UIFont(name: "MandroidBB", size: 20)
+        //scoreUI.firstMaterial?.diffuse.contents = UIColor.red
+        //scoreNode = SCNNode(geometry: scoreUI)
         scoreNode.position = SCNVector3(x: -6, y: 25, z: -60)
         scene.rootNode.addChildNode(scoreNode)
         
@@ -113,54 +185,99 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         
     }
     
+    func startHosting(action: UIAlertAction) {
+        print("session started by " + UIDevice.current.name)
+        isHost = true
+        mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "hws-project25", discoveryInfo: nil, session:  mcSession)
+        mcAdvertiserAssistant.start()
+    }
+    
+    func joinSession(action: UIAlertAction) {
+        print("session joined by " + UIDevice.current.name)
+        let mcBrowser = MCBrowserViewController(serviceType: "hws-project25", session:  mcSession)
+        mcBrowser.delegate = self
+        present(mcBrowser, animated: true) 
+    }
+    
+    @objc func showConnectionPrompt() { 
+        let ac = UIAlertController(title: "Connect to others", message: nil, preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "Host a session", style: .default, handler: startHosting))
+        ac.addAction(UIAlertAction(title: "Join a session", style: .default, handler: joinSession))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        self.present(ac, animated: true)
+    }
+    
     var done = false
     var contact = SCNPhysicsContact()
     var score = 0
     
+    func startGame() {
+//        if(self.isHost) {
+//            if(!gameOver) {
+//                queue.async {
+//                    while(!self.gameOver) {
+//                        self.time = -self.date.timeIntervalSinceNow
+//                        self.updateScore(increment: 2)
+//                        if(self.time > self.asteroidSpawnTime) {
+//                            DispatchQueue.main.async {
+//                                let a = self.createAsteroid()
+//                                let x = a.position.x
+//                                let y = a.position.y
+//                                let z = a.position.z
+//                                self.sendAsteroid(x: x, y: y, z: z)
+//                            }
+//                            if(self.score > 20) {
+//                                self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(1) + 1);
+//                            }
+//                            else if (self.score > 10) {
+//                                self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(2) + 1);
+//                            }
+//                            else {
+//                                self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(5) + 1);
+//                            }
+//                        }
+//                        //                    else if(self.time > self.earthSpawnTime) {
+//                        //                        DispatchQueue.main.async {
+//                        //                            self.createEarth(scene: self.scene)
+//                        //                        }
+//                        //                        self.earthSpawnTime = self.time + TimeInterval(arc4random_uniform(30) + 1);
+//                        //                    }
+//                        //                    else if(self.time > self.uranusSpawnTime) {
+//                        //                        DispatchQueue.main.async {
+//                        //                            self.createUranus(scene: self.scene)
+//                        //                        }
+//                        //                        self.uranusSpawnTime = self.time + TimeInterval(arc4random_uniform(20) + 1);
+//                        //                    }
+//                        //                    else if(self.time > self.jupiterSpawnTime) {
+//                        //                        DispatchQueue.main.async {
+//                        //                            self.createJupiter(scene: self.scene)
+//                        //                        }
+//                        //                        self.jupiterSpawnTime = self.time + TimeInterval(arc4random_uniform(20) + 1);
+//                        //                    }
+//                    }
+//                }
+//            }
+//        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        if(!gameOver) {
-            queue.async {
-                while(!self.gameOver) {
-                    self.time = -self.date.timeIntervalSinceNow
-                    self.updateScore(increment: 2)
-                    self.scoreUI.string = NSString(format:"%d", self.score) as String
-                    if(self.time > self.asteroidSpawnTime) {
-                        DispatchQueue.main.async {
-                            self.createAsteroid()
-                        }
-                        if(self.score > 20) {
-                            self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(1) + 1);
-                        }
-                        else if (self.score > 10) {
-                            self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(2) + 1); 
-                        }
-                        else {
-                            self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(5) + 1);
-                        }
-                    }
-                    else if(self.time > self.earthSpawnTime) {
-                        DispatchQueue.main.async {
-                            self.createEarth(scene: self.scene)
-                        }
-                        self.earthSpawnTime = self.time + TimeInterval(arc4random_uniform(30) + 1);
-                    }
-                    else if(self.time > self.uranusSpawnTime) {
-                        DispatchQueue.main.async {
-                            self.createUranus(scene: self.scene)
-                        }
-                        self.uranusSpawnTime = self.time + TimeInterval(arc4random_uniform(20) + 1);
-                    }
-                    else if(self.time > self.jupiterSpawnTime) {
-                        DispatchQueue.main.async {
-                            self.createJupiter(scene: self.scene)
-                        }
-                        self.jupiterSpawnTime = self.time + TimeInterval(arc4random_uniform(20) + 1);
-                    }
-                }
-            }
-        }
+        showConnectionPrompt()
     }
+    
+//    func sendImReady() {
+//        let imReady = true
+//        let data = NSKeyedArchiver.archivedData(withRootObject: imReady)
+//        if (mcSession?.connectedPeers.count)! > 0 {
+//            do {
+//                try  mcSession.send(data, toPeers:  mcSession.connectedPeers, with: .reliable)
+//            } catch let error as NSError {
+//                let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
+//                ac.addAction(UIAlertAction(title: "OK", style: .default))
+//                present(ac, animated: true)
+//            }
+//        }
+//    }
     
     func updateScore(increment: Int) {
         queue2.async {
@@ -197,19 +314,19 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         if (contact.nodeA == ship || contact.nodeA.physicsBody?.categoryBitMask == asteroidID) && (contact.nodeB == ship || contact.nodeB.physicsBody?.categoryBitMask == asteroidID) {
-                let particleSystem = SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)
-                let systemNode = SCNNode()
-                systemNode.addParticleSystem(particleSystem!)
-                systemNode.position = contact.nodeA.position
-                scnView.scene?.rootNode.addChildNode(systemNode)
-                gameOver = true
-                ship.removeFromParentNode()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.75, execute: {
-                    self.ship.removeFromParentNode()
-                    self.performSegue(withIdentifier: "GameOverSegue", sender:AnyClass.self)
-                })
+            let particleSystem = SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)
+            let systemNode = SCNNode()
+            systemNode.addParticleSystem(particleSystem!)
+            systemNode.position = contact.nodeA.position
+            scnView.scene?.rootNode.addChildNode(systemNode)
+            gameOver = true
+            ship.removeFromParentNode()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.75, execute: {
+                self.ship.removeFromParentNode()
+                self.performSegue(withIdentifier: "MpGameOverSegue", sender:AnyClass.self)
+            })
         }
-        
+            
         else if (contact.nodeA == ship || contact.nodeA.physicsBody?.categoryBitMask == earthID) && (contact.nodeB == ship || contact.nodeB.physicsBody?.categoryBitMask == earthID) {
             if (contact.nodeA.physicsBody?.categoryBitMask == earthID) {
                 contact.nodeA.removeFromParentNode()
@@ -228,7 +345,19 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         }
     }
     
-    func createAsteroid() {
+    func createAsteroidWithLocation(x: Float, y: Float, z: Float) {
+        let newAsteroid = asteroid.clone()
+        newAsteroid.position = SCNVector3(x, y, z)
+        let body = SCNPhysicsBody(type: .dynamic, shape: nil)
+        newAsteroid.physicsBody = body
+        newAsteroid.physicsBody?.velocity = SCNVector3(0, -6, 70)
+        scene.rootNode.addChildNode(newAsteroid)
+        
+        newAsteroid.physicsBody!.categoryBitMask = asteroidID
+        newAsteroid.physicsBody!.contactTestBitMask = 1
+    }
+    
+    func createAsteroid() -> SCNNode {
         let newAsteroid = asteroid.clone()
         var xCoord = 0
         if(leftOrRight) {
@@ -246,7 +375,21 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         
         newAsteroid.physicsBody!.categoryBitMask = asteroidID
         newAsteroid.physicsBody!.contactTestBitMask = 1
-        
+        return newAsteroid
+    }
+    
+    func sendAsteroid(x: Float, y: Float, z: Float) {
+        let asteroidCoords = [x, y, z]
+        let data = NSKeyedArchiver.archivedData(withRootObject: asteroidCoords)
+        if (mcSession?.connectedPeers.count)! > 0 {
+            do {
+                try  mcSession.send(data, toPeers:  mcSession.connectedPeers, with: .reliable)
+            } catch let error as NSError {
+                let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                present(ac, animated: true)
+            }
+        }
     }
     
     func createEarth(scene: SCNScene) {
@@ -314,7 +457,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         if(!gameOver) {
             // retrieve the SCNView
             let scnView = self.view as! SCNView
-        
+            
             // check what nodes are tapped
             let p = gestureRecognize.location(in: scnView)
             let hitResults = scnView.hitTest(p, options: [:])
@@ -335,9 +478,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                 //Unprojects a point from the 2D pixel coordinate system of the renderer to the 3D world coordinate system of the scene
                 let realLocation3D = scnView.unprojectPoint(location3D)
                 
-                //Only updating X axis position
-                ship.position = SCNVector3(realLocation3D.x, (ship.position.y), (ship.position.z))
-                
+                //Only updating X axis position 
+                //ship.position = SCNVector3(realLocation3D.x, (ship.position.y), (ship.position.z))
+                ship.position = SCNVector3(realLocation3D.x, realLocation3D.y, projectedOrigin.z)
+                sendMyPosition(x: ship.position.x, y: ship.position.y + 5, z: ship.position.z)
             }
         }
     }
@@ -363,17 +507,21 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         // Release any cached data, images, etc that aren't in use.
     }
     
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-        if segue.identifier == "GameOverSegue",
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if segue.identifier == "MpGameOverSegue",
             let destination = segue.destination as? GameOverViewController {
-            destination.tempScoreLabel = String(score-2)
+            if(oppShip == nil) {
+                destination.tempScoreLabel = "You Won!"
+            }
+            else {
+                destination.tempScoreLabel = "You Lost!"
+            }
         }
-        
-     }
-
+    }
+    
 }

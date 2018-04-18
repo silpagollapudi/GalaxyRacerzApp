@@ -23,6 +23,7 @@
 		729AF00D2074A8EA00D053A8 /* textureYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 729AF0092074A8DB00D053A8 /* textureYellow.png */; };
 		729AF00E2074A8EA00D053A8 /* texturePurple.png in Resources */ = {isa = PBXBuildFile; fileRef = 729AF00A2074A8E100D053A8 /* texturePurple.png */; };
 		729AF00F2074A8EA00D053A8 /* textureGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 729AF00B2074A8E600D053A8 /* textureGreen.png */; };
+		821DB9C520854DED0004CCD8 /* MultiplayerGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821DB9C420854DED0004CCD8 /* MultiplayerGameViewController.swift */; };
 		8297551D20758206005FD303 /* purpleShip.png in Resources */ = {isa = PBXBuildFile; fileRef = 8297551C20758205005FD303 /* purpleShip.png */; };
 		8297551F2075821F005FD303 /* yellowShip.png in Resources */ = {isa = PBXBuildFile; fileRef = 8297551E2075821E005FD303 /* yellowShip.png */; };
 		8297552120758229005FD303 /* greenShip.png in Resources */ = {isa = PBXBuildFile; fileRef = 8297552020758229005FD303 /* greenShip.png */; };
@@ -75,6 +76,7 @@
 		729AF0092074A8DB00D053A8 /* textureYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textureYellow.png; sourceTree = "<group>"; };
 		729AF00A2074A8E100D053A8 /* texturePurple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texturePurple.png; sourceTree = "<group>"; };
 		729AF00B2074A8E600D053A8 /* textureGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textureGreen.png; sourceTree = "<group>"; };
+		821DB9C420854DED0004CCD8 /* MultiplayerGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerGameViewController.swift; sourceTree = "<group>"; };
 		8297551C20758205005FD303 /* purpleShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purpleShip.png; sourceTree = "<group>"; };
 		8297551E2075821E005FD303 /* yellowShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowShip.png; sourceTree = "<group>"; };
 		8297552020758229005FD303 /* greenShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenShip.png; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				8297552420758280005FD303 /* SettingsViewController.swift */,
 				82A4DE8F2061BC2700AFCB1F /* SignupViewController.swift */,
 				82ACF4232060752700EECB2F /* GameViewController.swift */,
+				821DB9C420854DED0004CCD8 /* MultiplayerGameViewController.swift */,
 				5DA67BB62070247F00561E2E /* GameOverViewController.swift */,
 				721BF72320732FEA00B3BE20 /* Explosion.scnp */,
 				721BF7142072CA4900B3BE20 /* Jupiter.png */,
@@ -359,6 +362,7 @@
 				82A4DE902061BC2700AFCB1F /* SignupViewController.swift in Sources */,
 				5DFCEC0F20819D000015367D /* AchievementsViewController.swift in Sources */,
 				8297552720758504005FD303 /* MenuViewController.swift in Sources */,
+				821DB9C520854DED0004CCD8 /* MultiplayerGameViewController.swift in Sources */,
 				5DA67BB72070247F00561E2E /* GameOverViewController.swift in Sources */,
 				82ACF4502060799700EECB2F /* LoadScreenViewController.swift in Sources */,
 				82ACF4202060752700EECB2F /* AppDelegate.swift in Sources */,
@@ -521,10 +525,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AKCZJ4NV64;
+				DEVELOPMENT_TEAM = 6AJ426QD2F;
 				INFOPLIST_FILE = GalaxyRacerz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = GalaxyRacer;
+				PRODUCT_BUNDLE_IDENTIFIER = GalaxyRacerz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -536,10 +540,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AKCZJ4NV64;
+				DEVELOPMENT_TEAM = 6AJ426QD2F;
 				INFOPLIST_FILE = GalaxyRacerz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = GalaxyRacer;
+				PRODUCT_BUNDLE_IDENTIFIER = GalaxyRacerz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

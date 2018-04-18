@@ -17,26 +17,25 @@ class GameOverViewController: UIViewController {
     @IBAction func replayButtonPressed(_ sender: Any) {
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         scoreLabel.text = tempScoreLabel
         
         let defaults = UserDefaults.standard
-        let kHighScore = "highScore"
-
+        let kHighScore = "highScore" 
+ 
         let retrievedHighScore = defaults.integer(forKey: kHighScore)
         
         let scoreInt:Int = Int(scoreLabel.text!)!
         
-        if (scoreInt > retrievedHighScore) {
+        if (scoreInt > retrievedHighScore) { 
             defaults.set(scoreLabel.text, forKey: kHighScore)
-            
         }
+        
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning() { 
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
