@@ -39,7 +39,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
         switch state { 
         case MCSessionState.connected:
             startGame()
-        
+            // print("Connected: \(peerID.displayName)")
         case MCSessionState.connecting:
             print("Connecting: \(peerID.displayName)")
             
@@ -55,8 +55,9 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
                 self.oppShip.position.y = Float(opponentPosition[1])
                 self.oppShip.position.z = Float(opponentPosition[2])
             }
-            else if let a = NSKeyedUnarchiver.unarchiveObject(with: data) as? Array<Float> {
-                self.createAsteroidWithLocation(x: a[0], y: a[1], z: a[2])
+             else if let coords = NSKeyedUnarchiver.unarchiveObject(with: data) as? AsteroidCoordinates {
+                print("yo") 
+                self.createAsteroidWithLocation(coordinates: coords)
             }
         }
     }
@@ -194,6 +195,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
     
     func joinSession(action: UIAlertAction) {
         print("session joined by " + UIDevice.current.name)
+        isHost = false
         let mcBrowser = MCBrowserViewController(serviceType: "hws-project25", session:  mcSession)
         mcBrowser.delegate = self
         present(mcBrowser, animated: true) 
@@ -212,52 +214,49 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
     var score = 0
     
     func startGame() {
-//        if(self.isHost) {
-//            if(!gameOver) {
-//                queue.async {
-//                    while(!self.gameOver) {
-//                        self.time = -self.date.timeIntervalSinceNow
-//                        self.updateScore(increment: 2)
-//                        if(self.time > self.asteroidSpawnTime) {
-//                            DispatchQueue.main.async {
-//                                let a = self.createAsteroid()
-//                                let x = a.position.x
-//                                let y = a.position.y
-//                                let z = a.position.z
-//                                self.sendAsteroid(x: x, y: y, z: z)
-//                            }
-//                            if(self.score > 20) {
-//                                self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(1) + 1);
-//                            }
-//                            else if (self.score > 10) {
-//                                self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(2) + 1);
-//                            }
-//                            else {
-//                                self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(5) + 1);
-//                            }
-//                        }
-//                        //                    else if(self.time > self.earthSpawnTime) {
-//                        //                        DispatchQueue.main.async {
-//                        //                            self.createEarth(scene: self.scene)
-//                        //                        }
-//                        //                        self.earthSpawnTime = self.time + TimeInterval(arc4random_uniform(30) + 1);
-//                        //                    }
-//                        //                    else if(self.time > self.uranusSpawnTime) {
-//                        //                        DispatchQueue.main.async {
-//                        //                            self.createUranus(scene: self.scene)
-//                        //                        }
-//                        //                        self.uranusSpawnTime = self.time + TimeInterval(arc4random_uniform(20) + 1);
-//                        //                    }
-//                        //                    else if(self.time > self.jupiterSpawnTime) {
-//                        //                        DispatchQueue.main.async {
-//                        //                            self.createJupiter(scene: self.scene)
-//                        //                        }
-//                        //                        self.jupiterSpawnTime = self.time + TimeInterval(arc4random_uniform(20) + 1);
-//                        //                    }
-//                    }
-//                }
-//            }
-//        }
+        sleep(5)
+        if(self.isHost) {
+            if(!gameOver) { 
+                queue.async {
+                    while(!self.gameOver) {
+                        self.time = -self.date.timeIntervalSinceNow
+                        self.updateScore(increment: 2)
+                        if(self.time > self.asteroidSpawnTime) {
+                            DispatchQueue.main.async {
+                                let a = self.createAsteroid()
+                            }
+                            if(self.score > 20) {
+                                self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(1) + 1);
+                            }
+                            else if (self.score > 10) {
+                                self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(2) + 1);
+                            }
+                            else {
+                                self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(5) + 1);
+                            }
+                        }
+                        //                    else if(self.time > self.earthSpawnTime) {
+                        //                        DispatchQueue.main.async {
+                        //                            self.createEarth(scene: self.scene)
+                        //                        }
+                        //                        self.earthSpawnTime = self.time + TimeInterval(arc4random_uniform(30) + 1);
+                        //                    }
+                        //                    else if(self.time > self.uranusSpawnTime) {
+                        //                        DispatchQueue.main.async {
+                        //                            self.createUranus(scene: self.scene)
+                        //                        }
+                        //                        self.uranusSpawnTime = self.time + TimeInterval(arc4random_uniform(20) + 1);
+                        //                    }
+                        //                    else if(self.time > self.jupiterSpawnTime) {
+                        //                        DispatchQueue.main.async {
+                        //                            self.createJupiter(scene: self.scene)
+                        //                        }
+                        //                        self.jupiterSpawnTime = self.time + TimeInterval(arc4random_uniform(20) + 1);
+                        //                    }
+                    }
+                }
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -345,13 +344,14 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
         }
     }
     
-    func createAsteroidWithLocation(x: Float, y: Float, z: Float) {
+    func createAsteroidWithLocation(coordinates: AsteroidCoordinates) {
+        print("hi")
         let newAsteroid = asteroid.clone()
-        newAsteroid.position = SCNVector3(x, y, z)
+        newAsteroid.position = SCNVector3(coordinates.coordinates![0], coordinates.coordinates![1], coordinates.coordinates![2])
         let body = SCNPhysicsBody(type: .dynamic, shape: nil)
-        newAsteroid.physicsBody = body
+        newAsteroid.physicsBody = body 
         newAsteroid.physicsBody?.velocity = SCNVector3(0, -6, 70)
-        scene.rootNode.addChildNode(newAsteroid)
+        self.scene.rootNode.addChildNode(newAsteroid)
         
         newAsteroid.physicsBody!.categoryBitMask = asteroidID
         newAsteroid.physicsBody!.contactTestBitMask = 1
@@ -371,6 +371,12 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
         let body = SCNPhysicsBody(type: .dynamic, shape: nil)
         newAsteroid.physicsBody = body
         newAsteroid.physicsBody?.velocity = SCNVector3(0, -6, 70)
+        
+        let x = newAsteroid.position.x
+        let y = newAsteroid.position.y
+        let z = newAsteroid.position.z
+        self.sendAsteroid(x: Float(x), y: Float(y), z: Float(z))
+        
         scene.rootNode.addChildNode(newAsteroid)
         
         newAsteroid.physicsBody!.categoryBitMask = asteroidID
@@ -379,9 +385,9 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
     }
     
     func sendAsteroid(x: Float, y: Float, z: Float) {
-        let asteroidCoords = [x, y, z]
+        let asteroidCoords = AsteroidCoordinates(coords: [x,y,z])
         let data = NSKeyedArchiver.archivedData(withRootObject: asteroidCoords)
-        if (mcSession?.connectedPeers.count)! > 0 {
+        if (mcSession?.connectedPeers.count)! > 0 { 
             do {
                 try  mcSession.send(data, toPeers:  mcSession.connectedPeers, with: .reliable)
             } catch let error as NSError {
@@ -507,19 +513,19 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
         // Release any cached data, images, etc that aren't in use.
     }
     
-    // MARK: - Navigation
+    // MARK: - Navigation 
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "MpGameOverSegue",
-            let destination = segue.destination as? GameOverViewController {
-            if(oppShip == nil) {
-                destination.tempScoreLabel = "You Won!"
+            let destination = segue.destination as? MpGameOverViewController {
+            if(gameOver) {
+                destination.outcomeLabel = "You Won!"
             }
             else {
-                destination.tempScoreLabel = "You Lost!"
+                destination.outcomeLabel = "You Lost!"
             }
         }
     }

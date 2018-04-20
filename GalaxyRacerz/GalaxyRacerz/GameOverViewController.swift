@@ -26,7 +26,7 @@ class GameOverViewController: UIViewController {
  
         let retrievedHighScore = defaults.integer(forKey: kHighScore)
         
-        let scoreInt:Int = Int(scoreLabel.text!)!
+        let scoreInt:Int = Int(scoreLabel.text!)! 
         
         if (scoreInt > retrievedHighScore) { 
             defaults.set(scoreLabel.text, forKey: kHighScore)

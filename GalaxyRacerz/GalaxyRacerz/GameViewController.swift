@@ -121,7 +121,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         super.viewDidAppear(true)
         if(!gameOver) {
             queue.async {
-                while(!self.gameOver) {
+                while(!self.gameOver) { 
                     self.time = -self.date.timeIntervalSinceNow
                     self.updateScore(increment: 2)
                     self.scoreUI.string = NSString(format:"%d", self.score) as String
