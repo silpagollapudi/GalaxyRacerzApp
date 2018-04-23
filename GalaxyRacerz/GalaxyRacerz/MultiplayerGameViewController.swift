@@ -315,7 +315,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
                 self.performSegue(withIdentifier: "MpGameOverSegue", sender:AnyClass.self)
             })
         }
-        else if (contact.nodeA == oppShip || contact.nodeA.physicsBody?.categoryBitMask == asteroidID) && (contact.nodeB == oppShip || contact.nodeB.physicsBody?.categoryBitMask == asteroidID) {
+        if (contact.nodeA == oppShip || contact.nodeA.physicsBody?.categoryBitMask == asteroidID) && (contact.nodeB == oppShip || contact.nodeB.physicsBody?.categoryBitMask == asteroidID) {
             let particleSystem = SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)
             let systemNode = SCNNode()
             systemNode.addParticleSystem(particleSystem!)
