@@ -59,6 +59,9 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
                 print("yo") 
                 self.asteroidList.append(self.createAsteroidWithLocation(coordinates: coords))
             }
+            else if (NSKeyedUnarchiver.unarchiveObject(with: data) as? Bool)! {
+                self.performSegue(withIdentifier: "MpGameOverViewController", sender: Any?.self)
+            } 
         }
     }
     
@@ -219,7 +222,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
     var score = 0
     
     func startGame() {
-        sleep(5) 
+        sleep(5)
         if(self.isHost) {
             if(!gameOver) { 
                 queue.async {
@@ -240,6 +243,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
                                 self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(5) + 1);
                             }
                         }
+                        //self.deleteExtraneousAsteroids()
                     }
                 }
             }
@@ -248,7 +252,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
     
 //    func deleteExtraneousAsteroids() {
 //        let len = asteroidList.count-1
-//        for i in 0..<(len) {
+//        for i in 0..<(len) { 
 //            if (asteroidList[i].position.z > ship.position.z + 5) {
 //                asteroidList[i].geometry!.firstMaterial!.normal.contents = nil
 //                asteroidList[i].geometry!.firstMaterial!.diffuse.contents = nil
@@ -260,7 +264,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        if !userJoined {
+        if !isHost && !userJoined {
             showConnectionPrompt()
         }
     }
@@ -347,7 +351,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
     
     func createAsteroidWithLocation(coordinates: AsteroidCoordinates) -> SCNNode {
         print("hi")
-        let newAsteroid = asteroid.clone()
+        let newAsteroid = asteroid.flattenedClone()
         newAsteroid.position = SCNVector3(coordinates.coordinates![0], coordinates.coordinates![1], coordinates.coordinates![2])
         let body = SCNPhysicsBody(type: .dynamic, shape: nil)
         newAsteroid.physicsBody = body 
@@ -361,7 +365,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
     }
     
     func createAsteroid() -> SCNNode {
-        let newAsteroid = asteroid.clone()
+        let newAsteroid = asteroid.flattenedClone()
         var xCoord = 0
         if(leftOrRight) {
             xCoord = Int(arc4random_uniform(8) + 1)
@@ -401,65 +405,79 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
         }
     }
     
-    func createEarth(scene: SCNScene) {
-        let newEarth = earthNode.flattenedClone()
-        var xCoord = 0
-        if(leftOrRight) {
-            xCoord = Int(arc4random_uniform(8) + 1)
+    func sendResult() {
+        let iLost:Bool = false
+        let data = NSKeyedArchiver.archivedData(withRootObject: iLost)
+        if (mcSession?.connectedPeers.count)! > 0 {
+            do {
+                try  mcSession.send(data, toPeers:  mcSession.connectedPeers, with: .reliable)
+            } catch let error as NSError {
+                let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                present(ac, animated: true)
+            }
         }
-        else {
-            xCoord = -1 * Int(arc4random_uniform(8))
-        }
-        leftOrRight = !leftOrRight
-        newEarth.position = SCNVector3(Double(xCoord), 5.0, -60.0)
-        let body = SCNPhysicsBody(type: .dynamic, shape: nil)
-        newEarth.physicsBody = body
-        newEarth.physicsBody?.velocity = SCNVector3(0, -6, 58)
-        scene.rootNode.addChildNode(newEarth)
-        
-        newEarth.physicsBody!.categoryBitMask = earthID
-        newEarth.physicsBody!.contactTestBitMask = 1
     }
     
-    func createUranus(scene: SCNScene) {
-        let newUranus = uranusNode.flattenedClone()
-        var xCoord = 0
-        if(leftOrRight) {
-            xCoord = Int(arc4random_uniform(8) + 1)
-        }
-        else {
-            xCoord = -1 * Int(arc4random_uniform(8))
-        }
-        leftOrRight = !leftOrRight
-        newUranus.position = SCNVector3(Double(xCoord), 5.0, -60.0)
-        let body = SCNPhysicsBody(type: .dynamic, shape: nil)
-        newUranus.physicsBody = body
-        newUranus.physicsBody?.velocity = SCNVector3(0, -6, 58)
-        scene.rootNode.addChildNode(newUranus)
-        
-        newUranus.physicsBody!.categoryBitMask = planetID
-        newUranus.physicsBody!.contactTestBitMask = 1
-    }
-    
-    func createJupiter(scene: SCNScene) {
-        let newJupiter = jupiterNode.flattenedClone()
-        var xCoord = 0
-        if(leftOrRight) {
-            xCoord = Int(arc4random_uniform(8) + 1)
-        }
-        else {
-            xCoord = -1 * Int(arc4random_uniform(8))
-        }
-        leftOrRight = !leftOrRight
-        newJupiter.position = SCNVector3(Double(xCoord), 5.0, -60.0)
-        let body = SCNPhysicsBody(type: .dynamic, shape: nil)
-        newJupiter.physicsBody = body
-        newJupiter.physicsBody?.velocity = SCNVector3(0, -6, 58)
-        scene.rootNode.addChildNode(newJupiter)
-        
-        newJupiter.physicsBody!.categoryBitMask = planetID
-        newJupiter.physicsBody!.contactTestBitMask = 1
-    }
+//    func createEarth(scene: SCNScene) {
+//        let newEarth = earthNode.flattenedClone()
+//        var xCoord = 0
+//        if(leftOrRight) {
+//            xCoord = Int(arc4random_uniform(8) + 1)
+//        }
+//        else {
+//            xCoord = -1 * Int(arc4random_uniform(8))
+//        }
+//        leftOrRight = !leftOrRight
+//        newEarth.position = SCNVector3(Double(xCoord), 5.0, -60.0)
+//        let body = SCNPhysicsBody(type: .dynamic, shape: nil)
+//        newEarth.physicsBody = body
+//        newEarth.physicsBody?.velocity = SCNVector3(0, -6, 58)
+//        scene.rootNode.addChildNode(newEarth)
+//
+//        newEarth.physicsBody!.categoryBitMask = earthID
+//        newEarth.physicsBody!.contactTestBitMask = 1
+//    }
+//
+//    func createUranus(scene: SCNScene) {
+//        let newUranus = uranusNode.flattenedClone()
+//        var xCoord = 0
+//        if(leftOrRight) {
+//            xCoord = Int(arc4random_uniform(8) + 1)
+//        }
+//        else {
+//            xCoord = -1 * Int(arc4random_uniform(8))
+//        }
+//        leftOrRight = !leftOrRight
+//        newUranus.position = SCNVector3(Double(xCoord), 5.0, -60.0)
+//        let body = SCNPhysicsBody(type: .dynamic, shape: nil)
+//        newUranus.physicsBody = body
+//        newUranus.physicsBody?.velocity = SCNVector3(0, -6, 58)
+//        scene.rootNode.addChildNode(newUranus)
+//
+//        newUranus.physicsBody!.categoryBitMask = planetID
+//        newUranus.physicsBody!.contactTestBitMask = 1
+//    }
+//
+//    func createJupiter(scene: SCNScene) {
+//        let newJupiter = jupiterNode.flattenedClone()
+//        var xCoord = 0
+//        if(leftOrRight) {
+//            xCoord = Int(arc4random_uniform(8) + 1)
+//        }
+//        else {
+//            xCoord = -1 * Int(arc4random_uniform(8))
+//        }
+//        leftOrRight = !leftOrRight
+//        newJupiter.position = SCNVector3(Double(xCoord), 5.0, -60.0)
+//        let body = SCNPhysicsBody(type: .dynamic, shape: nil)
+//        newJupiter.physicsBody = body
+//        newJupiter.physicsBody?.velocity = SCNVector3(0, -6, 58)
+//        scene.rootNode.addChildNode(newJupiter)
+//
+//        newJupiter.physicsBody!.categoryBitMask = planetID
+//        newJupiter.physicsBody!.contactTestBitMask = 1
+//    }
     
     @objc
     func handleTap(_ gestureRecognize: UIPanGestureRecognizer) {
@@ -523,10 +541,11 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
         // Pass the selected object to the new view controller.
         if segue.identifier == "MpGameOverSegue",
             let destination = segue.destination as? MpGameOverViewController {
-            if(gameOver) {
+            if(!gameOver) {
                 destination.outcomeLabel = "You Won!"
             }
             else {
+                sendResult()
                 destination.outcomeLabel = "You Lost!"
             }
         }

@@ -135,7 +135,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                         else if (self.score > 10) {
                             self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(2) + 1); 
                         }
-                        else {
+                        else { 
                             self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(5) + 1);
                         }
                     }
@@ -203,7 +203,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                 systemNode.position = contact.nodeA.position
                 scnView.scene?.rootNode.addChildNode(systemNode)
                 gameOver = true
-                ship.removeFromParentNode()
+                ship.removeFromParentNode() 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.75, execute: {
                     self.ship.removeFromParentNode()
                     self.performSegue(withIdentifier: "GameOverSegue", sender:AnyClass.self)

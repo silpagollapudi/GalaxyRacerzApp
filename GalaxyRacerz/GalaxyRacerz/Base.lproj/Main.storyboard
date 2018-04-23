@@ -716,7 +716,7 @@
         <!--Mp Game Over View Controller-->
         <scene sceneID="SPU-W2-jiV">
             <objects>
-                <viewController id="hVA-PQ-qDT" customClass="MpGameOverViewController" sceneMemberID="viewController">
+                <viewController id="hVA-PQ-qDT" customClass="MpGameOverViewController" customModule="GalaxyRacerz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BiI-v9-RCq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -773,7 +773,6 @@
                     </view>
                     <connections>
                         <outlet property="mpResult" destination="Xqp-nS-Vig" id="9Ow-S5-TIi"/>
-                        <outlet property="scoreLabel" destination="Xqp-nS-Vig" id="Rjv-Qa-AC5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZXj-H1-leT" userLabel="First Responder" sceneMemberID="firstResponder"/>

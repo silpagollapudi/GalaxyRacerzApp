@@ -13,12 +13,12 @@ class MpGameOverViewController: UIViewController {
     var outcomeLabel = String()
     @IBOutlet weak var mpResult: UILabel!
     
-    override func viewDidLoad() {
+    override func viewDidLoad() { 
         super.viewDidLoad()
         mpResult.text = outcomeLabel
         // Do any additional setup after loading the view.
     }
-
+ 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
