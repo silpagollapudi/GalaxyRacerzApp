@@ -56,11 +56,10 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
                 self.oppShip.position.z = Float(opponentPosition[2])
             }
              else if let coords = NSKeyedUnarchiver.unarchiveObject(with: data) as? AsteroidCoordinates {
-                print("yo") 
                 self.asteroidList.append(self.createAsteroidWithLocation(coordinates: coords))
             }
-            else if (NSKeyedUnarchiver.unarchiveObject(with: data) as? Bool)! {
-                self.performSegue(withIdentifier: "MpGameOverViewController", sender: Any?.self)
+            else if !(NSKeyedUnarchiver.unarchiveObject(with: data) as? Bool)! {
+                self.performSegue(withIdentifier: "MpGameOverSegue", sender: Any?.self)
             } 
         }
     }
@@ -269,20 +268,6 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
         }
     }
     
-//    func sendImReady() {
-//        let imReady = true
-//        let data = NSKeyedArchiver.archivedData(withRootObject: imReady)
-//        if (mcSession?.connectedPeers.count)! > 0 {
-//            do {
-//                try  mcSession.send(data, toPeers:  mcSession.connectedPeers, with: .reliable)
-//            } catch let error as NSError {
-//                let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
-//                ac.addAction(UIAlertAction(title: "OK", style: .default))
-//                present(ac, animated: true) 
-//            } 
-//        }
-//    }
-    
     func updateScore(increment: Int) {
         queue2.async {
             sleep(2)
@@ -350,7 +335,6 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
     }
     
     func createAsteroidWithLocation(coordinates: AsteroidCoordinates) -> SCNNode {
-        print("hi")
         let newAsteroid = asteroid.flattenedClone()
         newAsteroid.position = SCNVector3(coordinates.coordinates![0], coordinates.coordinates![1], coordinates.coordinates![2])
         let body = SCNPhysicsBody(type: .dynamic, shape: nil)
