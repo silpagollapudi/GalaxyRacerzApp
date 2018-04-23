@@ -224,7 +224,11 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
             } else {
                 contact.nodeB.removeFromParentNode()
             }
-            score = score - 5
+            if (score < 5) {
+                score = 0
+            } else {
+                score = score - 5
+            }
         }
     }
     
