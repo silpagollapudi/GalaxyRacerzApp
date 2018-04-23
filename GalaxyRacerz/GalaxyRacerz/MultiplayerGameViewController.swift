@@ -11,7 +11,6 @@ import QuartzCore
 import SceneKit
 import MultipeerConnectivity
 
-//let appDelegate = UIApplication.shared.delegate as! AppDelegate
 var peerID: MCPeerID!
 var mcSession: MCSession!
 var mcAdvertiserAssistant: MCAdvertiserAssistant!
@@ -39,7 +38,6 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
         switch state { 
         case MCSessionState.connected:
             startGame()
-            // print("Connected: \(peerID.displayName)")
         case MCSessionState.connecting:
             print("Connecting: \(peerID.displayName)")
             
@@ -57,7 +55,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
             }
              else if let coords = NSKeyedUnarchiver.unarchiveObject(with: data) as? AsteroidCoordinates {
                 print("yo") 
-                self.createAsteroidWithLocation(coordinates: coords)
+                self.asteroidList.append(self.createAsteroidWithLocation(coordinates: coords))
             }
         }
     }
@@ -101,6 +99,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
     var scoreNode = SCNNode()
     var image = UIImage(named: "texture")
     var isHost = false
+    var asteroidList = [SCNNode]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,7 +111,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
         let defaults = UserDefaults.standard
         scene = SCNScene(named: "art.scnassets/ship.scn")!
         scene.physicsWorld.contactDelegate = self
-        scene.physicsWorld.gravity = SCNVector3(0, 0, 0)
+        scene.physicsWorld.gravity = SCNVector3(0, 0, 0) 
         
         asteroidScene = SCNScene(named: "art.scnassets/asteroid.scn")!
         asteroidScene.physicsWorld.contactDelegate = self
@@ -156,9 +155,6 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
         // detects interaction between asteroids and ship
         ship.physicsBody!.categoryBitMask = 1
         
-        //scoreUI.font = UIFont(name: "MandroidBB", size: 20)
-        //scoreUI.firstMaterial?.diffuse.contents = UIColor.red
-        //scoreNode = SCNNode(geometry: scoreUI)
         scoreNode.position = SCNVector3(x: -6, y: 25, z: -60)
         scene.rootNode.addChildNode(scoreNode)
         
@@ -223,7 +219,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
                         self.updateScore(increment: 2)
                         if(self.time > self.asteroidSpawnTime) {
                             DispatchQueue.main.async {
-                                let a = self.createAsteroid()
+                                self.asteroidList.append(self.createAsteroid())
                             }
                             if(self.score > 20) {
                                 self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(1) + 1);
@@ -235,33 +231,29 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
                                 self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(5) + 1);
                             }
                         }
-                        //                    else if(self.time > self.earthSpawnTime) {
-                        //                        DispatchQueue.main.async {
-                        //                            self.createEarth(scene: self.scene)
-                        //                        }
-                        //                        self.earthSpawnTime = self.time + TimeInterval(arc4random_uniform(30) + 1);
-                        //                    }
-                        //                    else if(self.time > self.uranusSpawnTime) {
-                        //                        DispatchQueue.main.async {
-                        //                            self.createUranus(scene: self.scene)
-                        //                        }
-                        //                        self.uranusSpawnTime = self.time + TimeInterval(arc4random_uniform(20) + 1);
-                        //                    }
-                        //                    else if(self.time > self.jupiterSpawnTime) {
-                        //                        DispatchQueue.main.async {
-                        //                            self.createJupiter(scene: self.scene)
-                        //                        }
-                        //                        self.jupiterSpawnTime = self.time + TimeInterval(arc4random_uniform(20) + 1);
-                        //                    }
                     }
                 }
             }
         }
     }
     
+//    func deleteExtraneousAsteroids() {
+//        let len = asteroidList.count-1
+//        for i in 0..<(len) {
+//            if (asteroidList[i].position.z > ship.position.z + 5) {
+//                asteroidList[i].geometry!.firstMaterial!.normal.contents = nil
+//                asteroidList[i].geometry!.firstMaterial!.diffuse.contents = nil
+//                asteroidList[i].removeFromParentNode()
+//                asteroidList.remove(at: i)
+//            }
+//        }
+//    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        showConnectionPrompt()
+        //if self.isBeingPresented || self.isMovingToParentViewController {
+            showConnectionPrompt() 
+        //}
     }
     
 //    func sendImReady() {
@@ -273,7 +265,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
 //            } catch let error as NSError {
 //                let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
 //                ac.addAction(UIAlertAction(title: "OK", style: .default))
-//                present(ac, animated: true)
+//                present(ac, animated: true) 
 //            }
 //        }
 //    }
@@ -340,13 +332,13 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
             } else {
                 contact.nodeB.removeFromParentNode()
             }
-            score = score - 5
+            score = score - 5 
         }
     }
     
-    func createAsteroidWithLocation(coordinates: AsteroidCoordinates) {
+    func createAsteroidWithLocation(coordinates: AsteroidCoordinates) -> SCNNode {
         print("hi")
-        let newAsteroid = asteroid.clone()
+        let newAsteroid = asteroid.flattenedClone()
         newAsteroid.position = SCNVector3(coordinates.coordinates![0], coordinates.coordinates![1], coordinates.coordinates![2])
         let body = SCNPhysicsBody(type: .dynamic, shape: nil)
         newAsteroid.physicsBody = body 
@@ -355,10 +347,12 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
         
         newAsteroid.physicsBody!.categoryBitMask = asteroidID
         newAsteroid.physicsBody!.contactTestBitMask = 1
+        
+        return newAsteroid
     }
     
     func createAsteroid() -> SCNNode {
-        let newAsteroid = asteroid.clone()
+        let newAsteroid = asteroid.flattenedClone() 
         var xCoord = 0
         if(leftOrRight) {
             xCoord = Int(arc4random_uniform(8) + 1)
@@ -504,7 +498,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
         if UIDevice.current.userInterfaceIdiom == .phone {
             return .allButUpsideDown
         } else {
-            return .all
+            return .all 
         }
     }
     

@@ -20,7 +20,7 @@ class AchievementsViewController: UIViewController {
         let defaults = UserDefaults.standard
         let kHighScore = "highScore"
 
-        let retrievedHighScore = String(describing: defaults.object(forKey: kHighScore))
+        let retrievedHighScore = String(describing: defaults.object(forKey: kHighScore)!)
         
         highScoreLabel.text = retrievedHighScore
         

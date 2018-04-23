@@ -178,6 +178,7 @@
 				821DB9C420854DED0004CCD8 /* MultiplayerGameViewController.swift */,
 				823C07832089BC2E00B17826 /* MpGameOverViewController.swift */,
 				823C07812089258800B17826 /* AsteroidCoordinates.swift */,
+				5DFCEC0E20819D000015367D /* AchievementsViewController.swift */,
 				5DA67BB62070247F00561E2E /* GameOverViewController.swift */,
 				721BF72320732FEA00B3BE20 /* Explosion.scnp */,
 				721BF7142072CA4900B3BE20 /* Jupiter.png */,
@@ -187,7 +188,6 @@
 				82A4DE932061BF4900AFCB1F /* User.swift */,
 				82ACF42D2060752700EECB2F /* Info.plist */,
 				72648B8D2061A40C007034E8 /* fonts */,
-				5DFCEC0E20819D000015367D /* AchievementsViewController.swift */,
 			);
 			path = GalaxyRacerz;
 			sourceTree = "<group>";

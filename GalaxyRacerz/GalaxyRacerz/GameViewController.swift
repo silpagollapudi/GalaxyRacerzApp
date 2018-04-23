@@ -139,19 +139,19 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                             self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(5) + 1);
                         }
                     }
-                    else if(self.time > self.earthSpawnTime) {
-                        DispatchQueue.main.async {
+                    else if(self.time > self.earthSpawnTime + 2) {
+                        DispatchQueue.main.async { 
                             self.createEarth(scene: self.scene)
                         }
                         self.earthSpawnTime = self.time + TimeInterval(arc4random_uniform(30) + 1);
                     }
-                    else if(self.time > self.uranusSpawnTime) {
+                    else if(self.time > self.uranusSpawnTime + 1) {
                         DispatchQueue.main.async {
                             self.createUranus(scene: self.scene)
                         }
                         self.uranusSpawnTime = self.time + TimeInterval(arc4random_uniform(20) + 1);
                     }
-                    else if(self.time > self.jupiterSpawnTime) {
+                    else if(self.time > self.jupiterSpawnTime + 1) {
                         DispatchQueue.main.async {
                             self.createJupiter(scene: self.scene)
                         }

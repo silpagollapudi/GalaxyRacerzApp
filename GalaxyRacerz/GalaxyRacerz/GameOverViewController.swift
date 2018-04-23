@@ -17,7 +17,7 @@ class GameOverViewController: UIViewController {
     @IBAction func replayButtonPressed(_ sender: Any) {
     }
     
-    override func viewDidLoad() {
+    override func viewDidLoad() { 
         super.viewDidLoad()
         scoreLabel.text = tempScoreLabel
         

@@ -697,50 +697,6 @@
             </objects>
             <point key="canvasLocation" x="-775.36231884057975" y="576.35869565217399"/>
         </scene>
-        <!--Player Connection View Controller-->
-        <scene sceneID="lgh-RO-gJV">
-            <objects>
-                <viewController id="JMw-1w-i3P" customClass="PlayerConnectionViewController" customModule="GalaxyRacerz" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="boe-MC-DLo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27I-H6-hAK">
-                                <rect key="frame" x="105" y="264" width="205" height="134"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="connect:" destination="JMw-1w-i3P" eventType="touchUpInside" id="fsE-M6-UuN"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="uQM-dF-u9V"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="LyQ-IC-vI3"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mNI-Sn-TCn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="610" y="2215"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="HUE-Nd-q68">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qrh-HA-sAu" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="541-NS-UZa">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="JMw-1w-i3P" kind="relationship" relationship="rootViewController" id="pS9-RZ-ei9"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RaX-jh-oLt" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1744.9275362318842" y="1834.2391304347827"/>
-        </scene>
         <!--Multiplayer Game View Controller-->
         <scene sceneID="JHG-Sj-Nx9">
             <objects>
@@ -847,6 +803,7 @@
         <image name="yellowShip.png" width="474" height="366"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="4oS-Og-p6R"/>
         <segue reference="KlU-C3-KHW"/>
         <segue reference="QdD-kM-n2t"/>
         <segue reference="I0V-Ck-gn8"/>
