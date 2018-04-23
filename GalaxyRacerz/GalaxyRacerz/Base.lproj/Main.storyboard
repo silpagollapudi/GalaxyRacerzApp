@@ -440,6 +440,14 @@
                                 <rect key="frame" x="-20" y="0.0" width="414" height="812"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0X0-pr-L7l">
+                                <rect key="frame" x="-10" y="10" width="86" height="84"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="back"/>
+                                <connections>
+                                    <segue destination="GnW-o6-Ne4" kind="show" id="K72-n3-gu8"/>
+                                </connections>
+                            </button>
                             <imageView userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="asteroidbelt.gif" translatesAutoresizingMaskIntoConstraints="NO" id="FVV-XL-y8b">
                                 <rect key="frame" x="-15" y="90" width="409" height="137"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -854,8 +862,8 @@
         <image name="yellowShip.png" width="474" height="366"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="z29-bf-wfp"/>
-        <segue reference="QdD-kM-n2t"/>
-        <segue reference="I0V-Ck-gn8"/>
+        <segue reference="K72-n3-gu8"/>
+        <segue reference="4NB-xN-iI4"/>
+        <segue reference="OPy-Nn-tbx"/>
     </inferredMetricsTieBreakers>
 </document>
