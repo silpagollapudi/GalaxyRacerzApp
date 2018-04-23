@@ -803,7 +803,6 @@
         <image name="yellowShip.png" width="474" height="366"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4oS-Og-p6R"/>
         <segue reference="KlU-C3-KHW"/>
         <segue reference="QdD-kM-n2t"/>
         <segue reference="I0V-Ck-gn8"/>

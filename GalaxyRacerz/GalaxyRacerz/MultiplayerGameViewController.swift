@@ -14,11 +14,13 @@ import MultipeerConnectivity
 var peerID: MCPeerID!
 var mcSession: MCSession!
 var mcAdvertiserAssistant: MCAdvertiserAssistant!
+var userJoined = false
 
 class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate {
     
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         dismiss(animated: true)
+        userJoined = true
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
@@ -136,8 +138,15 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
         ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
         oppShip = ship.flattenedClone()
         scene.rootNode.addChildNode(oppShip)
-        let oldPos = ship.position.y
-        oppShip.position.y = oldPos + 5
+        if(self.isHost) {
+            ship.position.x = ship.position.x - 3
+            oppShip.position.x = oppShip.position.x + 3
+        }
+        else {
+            ship.position.x = ship.position.x + 3
+            oppShip.position.x = oppShip.position.x - 3
+        }
+       // oppShip.position.x = oldPos + 3
         
         ship.physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
         
@@ -210,7 +219,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
     var score = 0
     
     func startGame() {
-        sleep(5)
+        sleep(5) 
         if(self.isHost) {
             if(!gameOver) { 
                 queue.async {
@@ -251,9 +260,9 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        //if self.isBeingPresented || self.isMovingToParentViewController {
-            showConnectionPrompt() 
-        //}
+        if !userJoined {
+            showConnectionPrompt()
+        }
     }
     
 //    func sendImReady() {
@@ -266,7 +275,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
 //                let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
 //                ac.addAction(UIAlertAction(title: "OK", style: .default))
 //                present(ac, animated: true) 
-//            }
+//            } 
 //        }
 //    }
     
@@ -332,13 +341,13 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
             } else {
                 contact.nodeB.removeFromParentNode()
             }
-            score = score - 5 
+            score = score - 5
         }
     }
     
     func createAsteroidWithLocation(coordinates: AsteroidCoordinates) -> SCNNode {
         print("hi")
-        let newAsteroid = asteroid.flattenedClone()
+        let newAsteroid = asteroid.clone()
         newAsteroid.position = SCNVector3(coordinates.coordinates![0], coordinates.coordinates![1], coordinates.coordinates![2])
         let body = SCNPhysicsBody(type: .dynamic, shape: nil)
         newAsteroid.physicsBody = body 
@@ -352,7 +361,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
     }
     
     func createAsteroid() -> SCNNode {
-        let newAsteroid = asteroid.flattenedClone() 
+        let newAsteroid = asteroid.clone()
         var xCoord = 0
         if(leftOrRight) {
             xCoord = Int(arc4random_uniform(8) + 1)
@@ -478,10 +487,9 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
                 //Unprojects a point from the 2D pixel coordinate system of the renderer to the 3D world coordinate system of the scene
                 let realLocation3D = scnView.unprojectPoint(location3D)
                 
-                //Only updating X axis position 
                 //ship.position = SCNVector3(realLocation3D.x, (ship.position.y), (ship.position.z))
                 ship.position = SCNVector3(realLocation3D.x, realLocation3D.y, projectedOrigin.z)
-                sendMyPosition(x: ship.position.x, y: ship.position.y + 5, z: ship.position.z)
+                sendMyPosition(x: ship.position.x, y: ship.position.y, z: ship.position.z)
             }
         }
     }
