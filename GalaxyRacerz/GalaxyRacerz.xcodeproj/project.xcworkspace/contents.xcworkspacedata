@@ -2,21 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../../../../Desktop/GR/home.png">
-   </FileRef>
-   <FileRef
-      location = "group:logout.png">
-   </FileRef>
-   <FileRef
-      location = "group:../../../../Desktop/GR/multiplayer.png">
-   </FileRef>
-   <FileRef
-      location = "group:../../../../Desktop/GR/refresh.png">
-   </FileRef>
-   <FileRef
-      location = "group:../../../../Desktop/GR/singleplayer.png">
-   </FileRef>
-   <FileRef
       location = "self:">
    </FileRef>
 </Workspace>

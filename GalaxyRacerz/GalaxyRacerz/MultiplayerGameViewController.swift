@@ -14,9 +14,9 @@ import MultipeerConnectivity
 var peerID: MCPeerID!
 var mcSession: MCSession!
 var mcAdvertiserAssistant: MCAdvertiserAssistant!
-var userJoined = false
 
 class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate {
+    var userJoined = false
     
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         dismiss(animated: true) 
@@ -58,9 +58,9 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
              else if let coords = NSKeyedUnarchiver.unarchiveObject(with: data) as? AsteroidCoordinates {
                 self.asteroidList.append(self.createAsteroidWithLocation(coordinates: coords))
             }
-            else if !(NSKeyedUnarchiver.unarchiveObject(with: data) as? Bool)! {
-                self.performSegue(withIdentifier: "MpGameOverSegue", sender: Any?.self)
-            }
+//            else if !(NSKeyedUnarchiver.unarchiveObject(with: data) as? Bool)! {
+//                self.performSegue(withIdentifier: "MpGameOverSegue", sender: Any?.self)
+//            }
         }
     }
     
@@ -121,14 +121,14 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
         asteroidScene.physicsWorld.contactDelegate = self
         asteroid = asteroidScene.rootNode.childNode(withName: "asteroid", recursively: true)!
         
-        earthNode = SCNNode(geometry: SCNSphere(radius: 2))
-        earthNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named:"earth.png")
-        
-        uranusNode = SCNNode(geometry: SCNSphere(radius: 1.5))
-        uranusNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named:"Uranus.png")
-        
-        jupiterNode = SCNNode(geometry: SCNSphere(radius: 3))
-        jupiterNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named:"Jupiter.png")
+//        earthNode = SCNNode(geometry: SCNSphere(radius: 2))
+//        earthNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named:"earth.png")
+//
+//        uranusNode = SCNNode(geometry: SCNSphere(radius: 1.5))
+//        uranusNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named:"Uranus.png")
+//
+//        jupiterNode = SCNNode(geometry: SCNSphere(radius: 3))
+//        jupiterNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named:"Jupiter.png")
         
         //creates and adds camera node to scene
         createCameraAndLight()
@@ -151,7 +151,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
        // oppShip.position.x = oldPos + 3
         
         ship.physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
-        
+        oppShip.physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
         // change ship color
         if(defaults.object(forKey: "shipColor") == nil || defaults.object(forKey: "shipColor") as! String == "texture") {
             defaults.set("texture", forKey: "shipColor")
@@ -165,6 +165,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
         
         // detects interaction between asteroids and ship
         ship.physicsBody!.categoryBitMask = 1
+        oppShip.physicsBody!.categoryBitMask = 1
         
         scoreNode.position = SCNVector3(x: -6, y: 25, z: -60)
         scene.rootNode.addChildNode(scoreNode)
@@ -321,7 +322,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
             systemNode.addParticleSystem(particleSystem!)
             systemNode.position = contact.nodeA.position
             scnView.scene?.rootNode.addChildNode(systemNode)
-            gameOver = true
+            //gameOver = true
             oppShip.removeFromParentNode() 
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.75, execute: {
                 self.oppShip.removeFromParentNode()
