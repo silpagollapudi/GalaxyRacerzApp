@@ -19,7 +19,7 @@ var userJoined = false
 class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate {
     
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true)
+        dismiss(animated: true) 
         userJoined = true
     }
     
@@ -60,7 +60,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
             }
             else if !(NSKeyedUnarchiver.unarchiveObject(with: data) as? Bool)! {
                 self.performSegue(withIdentifier: "MpGameOverSegue", sender: Any?.self)
-            } 
+            }
         }
     }
     
@@ -315,22 +315,18 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
                 self.performSegue(withIdentifier: "MpGameOverSegue", sender:AnyClass.self)
             })
         }
-            
-        else if (contact.nodeA == ship || contact.nodeA.physicsBody?.categoryBitMask == earthID) && (contact.nodeB == ship || contact.nodeB.physicsBody?.categoryBitMask == earthID) {
-            if (contact.nodeA.physicsBody?.categoryBitMask == earthID) {
-                contact.nodeA.removeFromParentNode()
-            } else {
-                contact.nodeB.removeFromParentNode()
-            }
-            score = score + 10
-            
-        } else if (contact.nodeA == ship || contact.nodeA.physicsBody?.categoryBitMask == planetID) && (contact.nodeB == ship || contact.nodeB.physicsBody?.categoryBitMask == planetID) {
-            if (contact.nodeA.physicsBody?.categoryBitMask == planetID) {
-                contact.nodeA.removeFromParentNode()
-            } else {
-                contact.nodeB.removeFromParentNode()
-            }
-            score = score - 5
+        else if (contact.nodeA == oppShip || contact.nodeA.physicsBody?.categoryBitMask == asteroidID) && (contact.nodeB == oppShip || contact.nodeB.physicsBody?.categoryBitMask == asteroidID) {
+            let particleSystem = SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)
+            let systemNode = SCNNode()
+            systemNode.addParticleSystem(particleSystem!)
+            systemNode.position = contact.nodeA.position
+            scnView.scene?.rootNode.addChildNode(systemNode)
+            gameOver = true
+            oppShip.removeFromParentNode() 
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.75, execute: {
+                self.oppShip.removeFromParentNode()
+                self.performSegue(withIdentifier: "MpGameOverSegue", sender:AnyClass.self)
+            })
         }
     }
     
