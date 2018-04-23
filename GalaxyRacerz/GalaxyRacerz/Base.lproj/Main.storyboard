@@ -529,9 +529,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xld-u0-rvq">
-                                <rect key="frame" x="233" y="647" width="106" height="111"/>
+                                <rect key="frame" x="233" y="647" width="117" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="main"/>
+                                <state key="normal" title="Button" image="logout.png"/>
                                 <connections>
                                     <segue destination="XuO-3g-ZSb" kind="show" id="QdD-kM-n2t"/>
                                 </connections>
@@ -809,7 +809,7 @@
         <image name="help" width="136" height="130"/>
         <image name="home.png" width="136" height="124"/>
         <image name="login" width="546" height="242"/>
-        <image name="main" width="112" height="122"/>
+        <image name="logout.png" width="126" height="104"/>
         <image name="multiplayer.png" width="304" height="116"/>
         <image name="person" width="342" height="380"/>
         <image name="play" width="182" height="172"/>
@@ -826,7 +826,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="kMo-rh-9Hv"/>
-        <segue reference="4NB-xN-iI4"/>
+        <segue reference="QdD-kM-n2t"/>
         <segue reference="OPy-Nn-tbx"/>
     </inferredMetricsTieBreakers>
 </document>

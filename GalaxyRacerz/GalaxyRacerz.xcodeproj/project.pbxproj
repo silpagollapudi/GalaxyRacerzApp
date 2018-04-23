@@ -18,6 +18,7 @@
 		721FE9FC208DC5C800FBD9FE /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 721FE9F7208DC5C700FBD9FE /* logout.png */; };
 		721FE9FD208DC5C800FBD9FE /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 721FE9F8208DC5C800FBD9FE /* refresh.png */; };
 		721FE9FE208DC5C800FBD9FE /* singleplayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 721FE9F9208DC5C800FBD9FE /* singleplayer.png */; };
+		721FEA00208DC82000FBD9FE /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 721FE9FF208DC81E00FBD9FE /* logout.png */; };
 		722D615820623C3100C99B3B /* MandroidBB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722D615720623C3100C99B3B /* MandroidBB.ttf */; };
 		722D616220624B1F00C99B3B /* Desktop in Resources */ = {isa = PBXBuildFile; fileRef = 722D616120624B1F00C99B3B /* Desktop */; };
 		722D61682062CF3200C99B3B /* asteroidbelt.gif in Resources */ = {isa = PBXBuildFile; fileRef = 722D61672062CF3200C99B3B /* asteroidbelt.gif */; };
@@ -79,6 +80,7 @@
 		721FE9F7208DC5C700FBD9FE /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
 		721FE9F8208DC5C800FBD9FE /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		721FE9F9208DC5C800FBD9FE /* singleplayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = singleplayer.png; sourceTree = "<group>"; };
+		721FE9FF208DC81E00FBD9FE /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
 		722D615720623C3100C99B3B /* MandroidBB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MandroidBB.ttf; sourceTree = "<group>"; };
 		722D616120624B1F00C99B3B /* Desktop */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Desktop; sourceTree = "<group>"; };
 		722D61672062CF3200C99B3B /* asteroidbelt.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = asteroidbelt.gif; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				82ACF41F2060752700EECB2F /* AppDelegate.swift */,
 				82ACF4212060752700EECB2F /* art.scnassets */,
 				82ACF4252060752700EECB2F /* Main.storyboard */,
+				721FE9FF208DC81E00FBD9FE /* logout.png */,
 				729AF0082074A8DA00D053A8 /* textureBlack.png */,
 				8297552A20758D67005FD303 /* blackShip.png */,
 				729AF00B2074A8E600D053A8 /* textureGreen.png */,
@@ -349,6 +352,7 @@
 				729AF00F2074A8EA00D053A8 /* textureGreen.png in Resources */,
 				721BF7162072CA4900B3BE20 /* Jupiter.png in Resources */,
 				82ACF4292060752700EECB2F /* Assets.xcassets in Resources */,
+				721FEA00208DC82000FBD9FE /* logout.png in Resources */,
 				82ACF4272060752700EECB2F /* Main.storyboard in Resources */,
 				8297551D20758206005FD303 /* purpleShip.png in Resources */,
 				721BF7152072CA4900B3BE20 /* Uranus.png in Resources */,
