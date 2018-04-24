@@ -611,7 +611,7 @@
                             <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cif-Ug-ijG">
                                 <rect key="frame" x="193" y="472" width="166" height="116"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="purpleShip.png"/>
+                                <state key="normal" title="Button" image="purpleShip"/>
                                 <connections>
                                     <action selector="selectPurpleShip:" destination="fCH-6b-QCM" eventType="touchUpInside" id="Lyo-Bb-8MZ"/>
                                     <segue destination="GnW-o6-Ne4" kind="show" id="GqO-Ex-tJz"/>
@@ -850,7 +850,7 @@
         <image name="multiplayer.png" width="304" height="116"/>
         <image name="person" width="342" height="380"/>
         <image name="play" width="182" height="172"/>
-        <image name="purpleShip.png" width="532" height="350"/>
+        <image name="purpleShip" width="532" height="350"/>
         <image name="refresh.png" width="126" height="120"/>
         <image name="rocket" width="512" height="512"/>
         <image name="settings" width="132" height="134"/>
@@ -862,7 +862,7 @@
         <image name="yellowShip.png" width="474" height="366"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="K72-n3-gu8"/>
+        <segue reference="anN-vA-PWy"/>
         <segue reference="4NB-xN-iI4"/>
         <segue reference="OPy-Nn-tbx"/>
     </inferredMetricsTieBreakers>
