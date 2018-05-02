@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GnW-o6-Ne4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XuO-3g-ZSb">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,7 +28,7 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </sceneKitView>
                     <connections>
-                        <segue destination="Rsf-ad-Kka" kind="show" identifier="GameOverSegue" id="raF-YW-oSq"/>
+                        <segue destination="Rsf-ad-Kka" kind="showDetail" identifier="GameOverSegue" id="raF-YW-oSq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
@@ -88,7 +88,7 @@
                                 </state>
                                 <connections>
                                     <action selector="replayButtonPressed:" destination="Rsf-ad-Kka" eventType="touchUpInside" id="oEX-OQ-GMs"/>
-                                    <segue destination="BV1-FR-VrT" kind="show" id="I0V-Ck-gn8"/>
+                                    <segue destination="BV1-FR-VrT" kind="showDetail" id="I0V-Ck-gn8"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="56" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DER-eN-8uE">
@@ -489,7 +489,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Yn-Zx-KRt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="280.80000000000001" y="-522.41379310344826"/>
+            <point key="canvasLocation" x="310" y="-826"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="UYN-HI-be1">
@@ -862,8 +862,9 @@
         <image name="yellowShip.png" width="474" height="366"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="anN-vA-PWy"/>
-        <segue reference="4NB-xN-iI4"/>
-        <segue reference="OPy-Nn-tbx"/>
+        <segue reference="8Cb-Oh-TKv"/>
+        <segue reference="5Sc-A0-5Sq"/>
+        <segue reference="JVK-5g-DYB"/>
+        <segue reference="I0V-Ck-gn8"/>
     </inferredMetricsTieBreakers>
 </document>

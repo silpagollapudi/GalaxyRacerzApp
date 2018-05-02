@@ -86,7 +86,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
     let queue = DispatchQueue.global()
     let queue2 = DispatchQueue(label: "scoreQueue", qos: .userInitiated)
     var date = Date()
-    var time = TimeInterval()
+    var time = TimeInterval() 
     var asteroidSpawnTime: TimeInterval = 0
     var earthSpawnTime: TimeInterval = 0
     var jupiterSpawnTime: TimeInterval = 0
@@ -198,7 +198,7 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
         print("session started by " + UIDevice.current.name)
         isHost = true
         mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "hws-project25", discoveryInfo: nil, session:  mcSession)
-        mcAdvertiserAssistant.start()
+        mcAdvertiserAssistant.start() 
     }
     
     func joinSession(action: UIAlertAction) {
@@ -209,11 +209,15 @@ class MultiplayerGameViewController: UIViewController, SCNPhysicsContactDelegate
         present(mcBrowser, animated: true) 
     }
     
+    func cancelMultiplayer(action: UIAlertAction) {
+        self.dismiss(animated: true)
+    }
+    
     @objc func showConnectionPrompt() { 
         let ac = UIAlertController(title: "Connect to others", message: nil, preferredStyle: .actionSheet)
         ac.addAction(UIAlertAction(title: "Host a session", style: .default, handler: startHosting))
         ac.addAction(UIAlertAction(title: "Join a session", style: .default, handler: joinSession))
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: cancelMultiplayer))
         self.present(ac, animated: true)
     }
     

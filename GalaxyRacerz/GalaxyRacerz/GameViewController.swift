@@ -12,9 +12,12 @@ import SceneKit
 
 class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     
+    weak var scnView: SCNView!
+    //let scnView = SCNView()
+    weak var scene: SCNScene!
+    //let scene = SCNScene()
+    
     var ship = SCNNode()
-    var scene = SCNScene()
-    var scnView = SCNView()
     var gameOver = false
     let queue = DispatchQueue.global()
     let queue2 = DispatchQueue(label: "scoreQueue", qos: .userInitiated)
@@ -33,15 +36,21 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     var jupiterNode = SCNNode()
     var uranusNode = SCNNode()
     var asteroidScene = SCNScene()
-    var scoreUI = SCNText(string: "0", extrusionDepth: 0.0)
+    var scoreUI = SCNText(string: "GO!", extrusionDepth: 0.0)
     var scoreNode = SCNNode()
     var image = UIImage(named: "texture")
-
+    var objects = [SCNNode]()
+    
+    deinit {
+        print("hello")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // create a new scene
+        // create a new scene 
         let defaults = UserDefaults.standard
         scene = SCNScene(named: "art.scnassets/ship.scn")!
+        //scnView.scene = scene
         scene.physicsWorld.contactDelegate = self
         scene.physicsWorld.gravity = SCNVector3(0, 0, 0)
         
@@ -58,7 +67,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         jupiterNode = SCNNode(geometry: SCNSphere(radius: 3))
         jupiterNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named:"Jupiter.png")
         
-        //creates and adds camera node to scene
+        //creates and adds camera node to scene 
         createCameraAndLight()
         
         //set background of scene
@@ -90,26 +99,26 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         scene.rootNode.addChildNode(scoreNode)
         
         // retrieve the SCNView
-        scnView = self.view as! SCNView
+        scnView = self.view as? SCNView
         
         // set the scene to the view
-        scnView.scene = scene
+        scnView?.scene = scene
         
         //eplosion
-        scnView.scene?.physicsWorld.contactDelegate = self
+        scnView?.scene?.physicsWorld.contactDelegate = self
         
         // allows the user to manipulate the camera
-        scnView.allowsCameraControl = true
+        scnView?.allowsCameraControl = true
         
         // show statistics such as fps and timing information
-        scnView.showsStatistics = false
+        scnView?.showsStatistics = false
         
         // configure the view
-        scnView.backgroundColor = UIColor.black
+        scnView?.backgroundColor = UIColor.black
         
         let tapGesture = UIPanGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        scnView.isUserInteractionEnabled = true
-        scnView.addGestureRecognizer(tapGesture)
+        scnView?.isUserInteractionEnabled = true
+        scnView?.addGestureRecognizer(tapGesture)
         
     }
     
@@ -119,9 +128,14 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        spawnObjects()
+    }
+    
+    var gameStarted = false
+    func spawnObjects() {
         if(!gameOver) {
             queue.async {
-                while(!self.gameOver) { 
+                while(!self.gameOver) {
                     self.time = -self.date.timeIntervalSinceNow
                     self.updateScore(increment: 2)
                     self.scoreUI.string = NSString(format:"%d", self.score) as String
@@ -133,14 +147,14 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                             self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(1) + 1);
                         }
                         else if (self.score > 10) {
-                            self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(2) + 1); 
-                        }
-                        else { 
+                            self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(2) + 1);
+                        } 
+                        else {
                             self.asteroidSpawnTime = self.time + TimeInterval(arc4random_uniform(5) + 1);
                         }
                     }
                     else if(self.time > self.earthSpawnTime + 2) {
-                        DispatchQueue.main.async { 
+                        DispatchQueue.main.async {
                             self.createEarth(scene: self.scene)
                         }
                         self.earthSpawnTime = self.time + TimeInterval(arc4random_uniform(30) + 1);
@@ -157,7 +171,23 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                         }
                         self.jupiterSpawnTime = self.time + TimeInterval(arc4random_uniform(20) + 1);
                     }
+                    //self.deallocAsteroid()
                 }
+            }
+        } 
+    }
+    
+    func deallocAsteroid() {
+        if((self.objects.count) > 2) {
+            self.objects[0].geometry!.firstMaterial!.normal.contents = nil
+            self.objects[0].geometry!.firstMaterial!.diffuse.contents = nil
+            self.objects[0].removeFromParentNode()
+            self.objects.remove(at: 0)
+            if(self.score > 20 && self.objects.count > 2) {
+                self.objects[1].geometry!.firstMaterial!.normal.contents = nil
+                self.objects[1].geometry!.firstMaterial!.diffuse.contents = nil
+                self.objects[1].removeFromParentNode()
+                self.objects.remove(at: 1)
             }
         }
     }
@@ -170,7 +200,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     }
     
     func createCameraAndLight() {
-        //let cameraNode = SCNNode()
         let cameraNode = SCNNode()
         
         // create and add a camera to the scene
@@ -197,15 +226,16 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         if (contact.nodeA == ship || contact.nodeA.physicsBody?.categoryBitMask == asteroidID) && (contact.nodeB == ship || contact.nodeB.physicsBody?.categoryBitMask == asteroidID) {
-                let particleSystem = SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)
+                let particleSystem = SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil) 
                 let systemNode = SCNNode()
                 systemNode.addParticleSystem(particleSystem!)
                 systemNode.position = contact.nodeA.position
-                scnView.scene?.rootNode.addChildNode(systemNode)
+            scnView.scene?.rootNode.addChildNode(systemNode)
                 gameOver = true
-                ship.removeFromParentNode() 
+            ship.removeFromParentNode()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.75, execute: {
                     self.ship.removeFromParentNode()
+                    //self.dismiss(animated: true, completion: nil)
                     self.performSegue(withIdentifier: "GameOverSegue", sender:AnyClass.self)
                 })
         }
@@ -250,7 +280,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         
         newAsteroid.physicsBody!.categoryBitMask = asteroidID
         newAsteroid.physicsBody!.contactTestBitMask = 1
-        
+        objects.append(newAsteroid)
     }
     
     func createEarth(scene: SCNScene) {
@@ -317,8 +347,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     func handleTap(_ gestureRecognize: UIPanGestureRecognizer) {
         if(!gameOver) {
             // retrieve the SCNView
-            let scnView = self.view as! SCNView
-        
+            //let scnView = self.view as! SCNView
+         
             // check what nodes are tapped
             let p = gestureRecognize.location(in: scnView)
             let hitResults = scnView.hitTest(p, options: [:])
@@ -328,7 +358,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                 //let result = hitResults[0]
                 //let node = result.node
                 
-                let projectedOrigin = scnView.projectPoint((ship.position))
+                let projectedOrigin = scnView.projectPoint(ship.position)
                 
                 //Location of the finger in the view on a 2D plane
                 let location2D = gestureRecognize.location(in: scnView)
@@ -341,7 +371,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                 
                 //Only updating X axis position
                 ship.position = SCNVector3(realLocation3D.x, (ship.position.y), (ship.position.z))
-                
             }
         }
     }
@@ -373,7 +402,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
-        if segue.identifier == "GameOverSegue",
+        if segue.identifier == "GameOverSegue", 
             let destination = segue.destination as? GameOverViewController {
             destination.tempScoreLabel = String(score-2)
         }

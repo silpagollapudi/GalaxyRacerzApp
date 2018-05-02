@@ -7,19 +7,21 @@
 //
 
 import UIKit
+import SceneKit
 
 class GameOverViewController: UIViewController {
-
+    
     var tempScoreLabel = String()
     
     @IBOutlet weak var scoreLabel: UILabel!
     
     @IBAction func replayButtonPressed(_ sender: Any) {
+        //self.navigationController?.popViewController(animated: true)
     }
     
-    override func viewDidLoad() { 
+    override func viewDidLoad() {
         super.viewDidLoad()
-        scoreLabel.text = tempScoreLabel
+        scoreLabel.text = tempScoreLabel 
         
         let defaults = UserDefaults.standard
         let kHighScore = "highScore" 
@@ -40,7 +42,6 @@ class GameOverViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 
